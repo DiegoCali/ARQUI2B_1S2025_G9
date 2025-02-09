@@ -19,10 +19,10 @@ void setup() {
 void drawTermometer(float fill){
     // Draw thermometer
     float thermometerHeight = height / 4;
-    float thermometerWidth = width / 20;
+    float thermometerWidth = width / 20;        
     float thermometerX = width / 8;
     float thermometerY = height / 8;
-    float thermometerFill = fill; // 50% fill
+    float thermometerFill = fill; 
     float labelX = thermometerX + thermometerWidth + 10;
     float labelY = thermometerY + thermometerHeight / 2;
 
@@ -46,7 +46,7 @@ void drawDrop(float fill){
     float dropGaugeWidth = width / 20;
     float dropGaugeX = width / 4;
     float dropGaugeY = height / 8;
-    float dropGaugeFill = fill; // 50% fill
+    float dropGaugeFill = fill; 
     float labelX = dropGaugeX + dropGaugeWidth + 10;
     float labelY = dropGaugeY + dropGaugeHeight / 2;
 
@@ -69,7 +69,7 @@ void drawRadar(float distance){
     float radarRadius = width / 2;
     float radarX = width * 7 / 8;
     float radarY = height * 3 / 8;
-    float radarDistance = 0.5; // 50% distance
+    float radarDistance = 0.5; 
     float labelX = radarX - 50;
     float labelY = radarY + 20;
 
@@ -123,7 +123,7 @@ void drawCo2Gauge(float concentration){
     float co2GaugeWidth = width / 20;
     float co2GaugeX = width * 3 / 4;
     float co2GaugeY = height * 5 / 8;
-    float co2GaugeFill = concentration; // 50% fill
+    float co2GaugeFill = concentration; 
     float labelX = co2GaugeX + co2GaugeWidth + 10;
     float labelY = co2GaugeY + co2GaugeHeight / 2;
 
