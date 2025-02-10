@@ -19,15 +19,11 @@ float ultrasonicController(int LED, int TRIG, int ECHO, int ECHO_TIME, float DIS
   else{
     digitalWrite(LED, LOW);      
   }
-  return DISTANCE;
-  //delay(500);
+  return DISTANCE;  
 }
 
 float co2Controller(int CO2_SENSOR, byte ANALOG_READ, float PERCENTAGE) {
   CO2_SENSOR = analogRead(A0); // leer los valores  
-  // Convert sensor byte input to Co2 percentage
-  float PERCENTAGE = CO2_SENSOR/1.0;
-  // ************ MOSTRAR VALORES ***************
-  return PERCENTAGE;
-  //delay(500);
+  float PERCENTAGE = CO2_SENSOR/1.0; // Convert sensor byte input to Co2 percentage
+  return PERCENTAGE;  
 }
