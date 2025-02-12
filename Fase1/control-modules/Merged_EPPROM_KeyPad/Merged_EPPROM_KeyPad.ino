@@ -1,12 +1,13 @@
 #include <Keypad.h>
-#include <Adafruit_LiquidCrystal.h>
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
 #include <EEPROM.h>
 
 
 /* ULTRASONICO - DETECTAR PERSONA */
 
 //********led ****
-int LED = 10;   // Pin digital 6
+int LED = 52;   // Pin digital 6
 
 // ************ SENSOR
 // TRIG - signal de salida. arduino -> sensor
@@ -23,7 +24,7 @@ int distancia = 0;
 
 // CO2 Sensor
 int CO2_Sensor = 0;
-Adafruit_LiquidCrystal lcd_1(0); // Inicializa el LCD
+LiquidCrystal_I2C lcd_1(0x27,20,4); // Inicializa el LCD
 
 
 //--------------------
@@ -90,8 +91,9 @@ void setup(){
 
  
   Serial.begin(9600); // Inicio serial
-  lcd_1.begin(16, 2); // 16 columnas y 2 filas
-  lcd_1.setCursor(0, 0); // Empieza en la esquina izq
+  lcd_1.init();
+
+  lcd_1.setCursor(2, 0); // Empieza en la esquina izq
   lcd_1.print("   Bienvenidos G9  ");
   delay(2000);  // 2 segundos para el menu
   lcd_1.clear();
