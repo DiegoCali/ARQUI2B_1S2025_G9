@@ -35,9 +35,6 @@ void loop() {
 ## Cómo hacer sus ramas:
 Ustedes generarán una rama de la rama develop harán sus cambios ahí y luego yo haré los demás cambios y lo uniré con el main:
 ```mermaid
----
-title: Ejemplo de feature:
----
 gitGraph
   commit
   commit
