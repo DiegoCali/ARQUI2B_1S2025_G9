@@ -32,3 +32,24 @@ void loop() {
   // ...
 }
 ```
+## Cómo hacer sus ramas:
+Ustedes generarán una rama de la rama develop harán sus cambios ahí y luego yo haré los demás cambios y lo uniré con el main:
+```mermaid
+gitGraph
+  commit
+  commit
+  branch develop
+  checkout develop
+  commit
+  commit
+  branch diego-gui
+  checkout diego-gui
+  commit
+  commit
+  checkout develop
+  merge diego-gui
+  commit
+  commit
+  checkout main
+  merge develop
+```
