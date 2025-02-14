@@ -6,13 +6,21 @@ import processing.serial.*;
 Serial myPort;  // Create object from Serial class
 String val;     // Data received from the serial port
 
+// Initializate values with default values
+float temperature = 0.6;
+float humidity = 0.7;
+float distance = 0.5;
+boolean light = false;
+float co2 = 0.45;
+
 void setup() {
     size(512, 512);
     try {
         myPort = new Serial(this, "/dev/ttyACM0", 9600);
         myPort.bufferUntil('\n');
     } catch (Exception e){
-        println("Error opening serial port");
+        println("Error opening serial port:", e);
+        throw e;
     }        
 }
 
@@ -142,13 +150,6 @@ void drawCo2Gauge(float concentration){
 }
 
 void draw() {
-    // Initializate values with default values
-    float temperature = 0.6;
-    float humidity = 0.7;
-    float distance = 0.5;
-    boolean light = false;
-    float co2 = 0.45;
-
     // Read data from serial port
     try {
         val = myPort.readStringUntil('\n');
@@ -157,11 +158,13 @@ void draw() {
     }
     if (val != null){
         String[] data = split(val, ";");
-        temperature = float(data[0]);
-        humidity = float(data[1]);
-        distance = float(data[2]);
-        light = int(data[3]) == 1;
-        co2 = float(data[4]);
+        if (data.length == 5){
+            distance = float(data[0])/100;
+            co2 = float(data[1])/700;
+            temperature = float(data[2])/100;
+            humidity = float(data[3])/100;
+            light = int(int(data[4])/100) == 0;
+        }
     }
 
     background(255);

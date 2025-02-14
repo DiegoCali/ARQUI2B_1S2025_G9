@@ -1,6 +1,8 @@
 #include "modules-library.h"
+float DISTANCE = 0;
+float ECHO_TIME = 0;
 
-float ultrasonicController(int LED, int TRIG, int ECHO, int ECHO_TIME, float DISTANCE){
+float ultrasonicController(int LED, int TRIG, int ECHO){
   // *** activacion del trig - envio y recepcion
   digitalWrite(TRIG, HIGH);
   delayMicroseconds(1);
@@ -22,8 +24,26 @@ float ultrasonicController(int LED, int TRIG, int ECHO, int ECHO_TIME, float DIS
   return DISTANCE;  
 }
 
-float co2Controller(int CO2_SENSOR, byte ANALOG_READ, float PERCENTAGE) {
-  CO2_SENSOR = analogRead(A0); // leer los valores  
-  float PERCENTAGE = CO2_SENSOR/1.0; // Convert sensor byte input to Co2 percentage
-  return PERCENTAGE;  
+float co2Controller(int ANALOG_READ) {  
+  float PERCENTAGE = analogRead(ANALOG_READ)/1.0; // leer los valores  
+  delay(100);
+  return PERCENTAGE;
+}
+
+float temperatureController(DHT dht){
+  float TEMPERATURE = dht.readTemperature();
+  delay(500);
+  return TEMPERATURE;
+}
+
+float humidityController(DHT dht){
+  float HUMIDITY = dht.readHumidity();
+  delay(100);
+  return HUMIDITY;
+}
+
+float luminousController(int PHOTO_SIG){
+  float LUMINOUS_SIGNAL = analogRead(PHOTO_SIG)/1.0;
+  delay(100);
+  return LUMINOUS_SIGNAL;
 }
