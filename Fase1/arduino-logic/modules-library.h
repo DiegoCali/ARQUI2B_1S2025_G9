@@ -7,12 +7,14 @@
 #include <MQUnifiedsensor.h>
 #include <Keypad.h>
 #include <EEPROM.h>
+#include <ACS712.h>
 
 void ultrasonicController(int LED, int TRIG, int ECHO);
 void co2Controller(MQUnifiedsensor MQ135);
 void temperatureController(DHT dht);
 void humidityController(DHT dht);
 void luminousController(int PHOTO_SIG);
+void currentController(ACS712 ACS);
 void lcdController(LiquidCrystal_I2C lcd, Keypad keypad);
 void sendSerial();
 

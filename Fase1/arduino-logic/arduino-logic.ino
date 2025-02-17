@@ -44,6 +44,8 @@ Keypad keypad = Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
+ACS712 ACS(A2, 5.0, 1023, 100);
+
 void setup() {
   Serial.begin(9600);
 
@@ -80,6 +82,7 @@ void loop() {
   temperatureController(dht);
   humidityController(dht);
   luminousController(LSIG);
+  currentController(ACS);
   lcdController(lcd, keypad);
   sendSerial();
   delay(1000);

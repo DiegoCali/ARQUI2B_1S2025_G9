@@ -3,15 +3,19 @@
 float DISTANCE = 0;
 float ECHO_TIME = 0;
 
+const float Rf = 10000; // Fixed resistor value (10kΩ)
+const float A = 500;    // LDR constant
+const float B = 0.8;    // LDR exponent
+
 int screen = 1;
 int last_screen = 0;
 char lcd_key;
 int adc_key_in = 0;
 bool menu_active = true;
 
-float liveData[5];
+float liveData[6];
 
-char sensorChar[5] = {'D', 'G', 'T', 'H', 'O'};
+char sensorChar[6] = {'D', 'G', 'T', 'H', 'L', 'C'};
 
 void menuPrint(int SCREEN, LiquidCrystal_I2C lcd){
   lcd.clear();
@@ -25,7 +29,7 @@ void menuPrint(int SCREEN, LiquidCrystal_I2C lcd){
 
 void saveEEPROM(){
   int offset = 0;
-  for (int i = 0; i < 5; i++){
+  for (int i = 0; i < 6; i++){
     EEPROM.put(offset, liveData[i]);
     offset += sizeof(float);
   }  
@@ -34,7 +38,7 @@ void saveEEPROM(){
 float* getEEPROM(){
   static float response[5];
   int offset = 0;
-  for (int i = 0; i < 5; i++){
+  for (int i = 0; i < 6; i++){
     EEPROM.get(offset, response[i]);
     offset += sizeof(float);
   }
@@ -59,18 +63,18 @@ void printData(bool live, LiquidCrystal_I2C lcd){
     lcd.print(":");
     colOffset += 2;
     lcd.setCursor(colOffset, rowOffset);
-    lcd.print(int(liveData[i]));
+    lcd.print(int(data[i]));
     colOffset += 3;
   }
   rowOffset++;
   colOffset = 0;
-  for (i ; i < 5; i++) {
+  for (i ; i < 6; i++) {
     lcd.setCursor(colOffset, rowOffset);
     lcd.print(sensorChar[i]);
     lcd.print(":");
     colOffset += 2;
     lcd.setCursor(colOffset, rowOffset);
-    lcd.print(int(liveData[i]));
+    lcd.print(int(data[i]));
     colOffset += 3;
   }
 }
@@ -121,10 +125,18 @@ void humidityController(DHT dht){
 }
 
 void luminousController(int PHOTO_SIG){
-  float DARKNESS = analogRead(PHOTO_SIG)/1.0;
-  if (DARKNESS > 100) DARKNESS = 99.99;
+  int raw = analogRead(PHOTO_SIG);
+  float Vout = (5.0 * raw) / 1023.0;
+  float Rldr = Rf * ((5.0 / Vout) - 1);
+  float lux = pow((Rldr / A), (1.0 / -B));
   delay(100);
-  liveData[4] = DARKNESS;
+  liveData[4] = lux;
+}
+
+void currentController(ACS712 ACS){
+  float mA = ACS.mA_DC();
+  delay(100);
+  liveData[5] = mA;
 }
 
 void lcdController(LiquidCrystal_I2C lcd, Keypad keypad){
@@ -178,5 +190,7 @@ void sendSerial(){
   Serial.print(liveData[3]);
   Serial.print(";");
   Serial.print(liveData[4]);
+  Serial.print(";");
+  Serial.print(liveData[5]);
   Serial.println("");
 }
