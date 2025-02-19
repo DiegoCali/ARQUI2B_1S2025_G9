@@ -202,12 +202,15 @@ Debido a la naturaleza de la maqueta, es necesario el uso de material que ayude 
 Es por eso que se elaboraron torres de servidores, con el objetivo de ambientar y mejorar la presentacion de la maqueta.
 
  * Torre 1
+  
 ![ObtenerLink](https://i.postimg.cc/CKsCFnVt/torre-Servidor-1.jpg)
 
 * Torre 2
+  
 ![ObtenerLink](https://i.postimg.cc/658hdQd2/torre-Servidor-2.jpg)
 
 * Torre 3
+  
 ![ObtenerLink](https://i.postimg.cc/wBpc8cnL/torre-Servidor-3.jpg)
 
 ![ObtenerLink](https://i.postimg.cc/gjJHtzQ7/torre-Servidor-Full.jpg)
