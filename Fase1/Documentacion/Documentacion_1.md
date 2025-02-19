@@ -194,3 +194,21 @@ Los sensores fueron colocados en lugares estratégicos para garantizar su correc
 ![ObtenerLink](https://i.postimg.cc/HnxVLdFS/Sensor1.png)
 ![ObtenerLink](https://i.postimg.cc/sxN1Qbr3/Sensor2.png)
 ![ObtenerLink](https://i.postimg.cc/1RC8jVNb/Sensor3.png)
+
+ * Props
+
+Debido a la naturaleza de la maqueta, es necesario el uso de material que ayude a simular de forma correcta el espacio que se quiere replicar. 
+
+Es por eso que se elaboraron torres de servidores, con el objetivo de ambientar y mejorar la presentacion de la maqueta.
+
+ * Torre 1
+![ObtenerLink](https://i.postimg.cc/CKsCFnVt/torre-Servidor-1.jpg)
+
+* Torre 2
+![ObtenerLink](https://i.postimg.cc/658hdQd2/torre-Servidor-2.jpg)
+
+* Torre 3
+![ObtenerLink](https://i.postimg.cc/wBpc8cnL/torre-Servidor-3.jpg)
+
+![ObtenerLink](https://i.postimg.cc/gjJHtzQ7/torre-Servidor-Full.jpg)
+    
