@@ -12,6 +12,7 @@ float humidity = 0.7;
 float distance = 0.5;
 boolean light = false;
 float co2 = 0.45;
+float current = 5;
 
 void setup() {
     size(512, 512);
@@ -19,8 +20,7 @@ void setup() {
         myPort = new Serial(this, "/dev/ttyACM0", 9600);
         myPort.bufferUntil('\n');
     } catch (Exception e){
-        println("Error opening serial port:", e);
-        throw e;
+        println("Error opening serial port:", e);        
     }        
 }
 
@@ -52,7 +52,7 @@ void drawDrop(float fill){
     // Draw drop gauge
     float dropGaugeHeight = height / 4;
     float dropGaugeWidth = width / 20;
-    float dropGaugeX = width / 4;
+    float dropGaugeX = width / 4 + 10;
     float dropGaugeY = height / 8;
     float dropGaugeFill = fill; 
     float labelX = dropGaugeX + dropGaugeWidth + 10;
@@ -150,6 +150,7 @@ void drawCo2Gauge(float concentration){
 }
 
 void draw() {
+    textSize(20);
     // Read data from serial port
     try {
         val = myPort.readStringUntil('\n');
@@ -158,12 +159,13 @@ void draw() {
     }
     if (val != null){
         String[] data = split(val, ";");
-        if (data.length == 5){
+        if (data.length == 6){
             distance = float(data[0])/100;
-            co2 = float(data[1])/700;
+            co2 = float(data[1])/10;
             temperature = float(data[2])/100;
             humidity = float(data[3])/100;
             light = int(int(data[4])/100) == 0;
+            current = int(data[5]);
         }
     }
 
@@ -198,4 +200,13 @@ void draw() {
 
     // Draw Co2 gauge
     drawCo2Gauge(co2);
+
+    // write current value     
+    if ( current <= 5 && current > 4){
+        fill(0);        
+        text("Current: " + current + "mA", width/2 + 10, height - 10);
+    }else {
+        fill(255, 0, 0);
+        text("[ERROR] Current: " + current + "mA", width/2 + 10, height - 10);
+    }    
 }
