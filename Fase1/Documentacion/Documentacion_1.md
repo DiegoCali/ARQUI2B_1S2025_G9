@@ -215,3 +215,45 @@ Es por eso que se elaboraron torres de servidores, con el objetivo de ambientar 
 
 ![ObtenerLink](https://i.postimg.cc/gjJHtzQ7/torre-Servidor-Full.jpg)
     
+
+## Stack IoT Framework
+
+Para organizar la arquitectura del sistema, se utilizó el Stack IoT Framework, que se compone de varias capas que facilitan la interacción entre los sensores, el procesamiento de datos y la comunicación con la nube. A continuación, se describen las capas involucradas:
+
+### **1. Capa de Percepción**
+Esta es la primera capa del sistema y se encarga de la adquisición de datos mediante los sensores. Aquí se incluyen:
+
+- Sensor ultrasónico para detección de proximidad.
+- Sensor de temperatura y humedad DHT22.
+- Sensor de CO2.
+- Sensor LDR para monitoreo lumínico.
+
+Estos sensores capturan información relevante sobre el entorno y la transmiten al sistema para su análisis.
+
+### **2. Capa de Red**
+Esta capa se encarga de la transmisión de datos entre los sensores y el microcontrolador. En este proyecto, se utiliza la comunicación serie con `Serial.begin(9600);` para enviar los datos capturados al sistema central, permitiendo su procesamiento y visualización.
+
+### **3. Capa de Procesamiento**
+En esta capa, el microcontrolador interpreta los datos recibidos y ejecuta las acciones necesarias. Entre sus funciones principales destacan:
+
+- Análisis de la distancia detectada por el sensor ultrasónico.
+- Determinación de la calidad del aire mediante el sensor de CO2.
+- Control de los LEDs en función de los valores de temperatura y luminosidad.
+- Almacenamiento temporal de los datos para su posterior análisis.
+
+### **4. Capa de Aplicación**
+Esta última capa proporciona la interfaz con el usuario y permite visualizar los datos obtenidos en tiempo real. En este caso, se emplean dos medios principales:
+
+- **Display LCD:** Muestra valores en tiempo real, como temperatura y humedad.
+- **Software Processing:** Se utiliza para presentar gráficamente la información recolectada en una interfaz interactiva.
+
+
+## Diagrama Funcionamiento
+
+[![graphviz.png](https://i.postimg.cc/sgQQ7qzh/graphviz.png)](https://postimg.cc/w1zjdW7q)
+
+
+## Diagrama Proceso
+[![graphviz-1.png](https://i.postimg.cc/C5rtTzzd/graphviz-1.png)](https://postimg.cc/hQxMV48q)
+
+
