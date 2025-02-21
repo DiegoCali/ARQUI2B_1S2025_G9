@@ -3,9 +3,11 @@
 float DISTANCE = 0;
 float ECHO_TIME = 0;
 
-const float Rf = 10000; // Fixed resistor value (10kΩ)
-const float A = 500;    // LDR constant
-const float B = 0.8;    // LDR exponent
+const float sensivity = 0.185;
+const float zeroCurrentVoltage = 2.5;
+
+const float A = 675.0;
+const float B = 0.75;
 
 int screen = 1;
 int last_screen = 0;
@@ -94,7 +96,7 @@ void ultrasonicController(int LED, int TRIG, int ECHO){
   DISTANCE = ECHO_TIME/58.2;
   if (DISTANCE > 99 ) DISTANCE = 99.99; 
   
-  if (DISTANCE < 15){
+  if (DISTANCE < 8){
     digitalWrite(LED, HIGH);               
   }
   else{
@@ -125,16 +127,18 @@ void humidityController(DHT dht){
 }
 
 void luminousController(int PHOTO_SIG){
-  int raw = analogRead(PHOTO_SIG);
-  float Vout = (5.0 * raw) / 1023.0;
-  float Rldr = Rf * ((5.0 / Vout) - 1);
-  float lux = pow((Rldr / A), (1.0 / -B));
+  int raw = analogRead(PHOTO_SIG);  
+  float voltage = (raw/1023.0) * 5.0;
+  float luxes = A*(1/pow(voltage, B));
   delay(100);
-  liveData[4] = lux;
+  liveData[4] = luxes;
 }
 
-void currentController(ACS712 ACS){
-  float mA = ACS.mA_DC();
+void currentController(int ACS){
+  int raw = analogRead(ACS);
+  float voltage = (raw/1023.0) * 5.0;
+  if (voltage < 2.5) voltage = 2.5;
+  float mA = (voltage - zeroCurrentVoltage)/sensivity;
   delay(100);
   liveData[5] = mA;
 }

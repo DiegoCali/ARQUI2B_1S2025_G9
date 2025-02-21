@@ -14,7 +14,7 @@ void co2Controller(MQUnifiedsensor MQ135);
 void temperatureController(DHT dht);
 void humidityController(DHT dht);
 void luminousController(int PHOTO_SIG);
-void currentController(ACS712 ACS);
+void currentController(int ACS);
 void lcdController(LiquidCrystal_I2C lcd, Keypad keypad);
 void sendSerial();
 
