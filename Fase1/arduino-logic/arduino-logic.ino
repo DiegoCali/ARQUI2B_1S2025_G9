@@ -46,12 +46,20 @@ LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 int ACS = A2;
 
+// Error leds
+int APIN = 9;
+int CPIN = 8;
+int THPIN = 7;
+
 void setup() {
   Serial.begin(9600);
 
   pinMode(ECHO, INPUT);
   pinMode(TRIG, OUTPUT);
-  pinMode(LED, OUTPUT);  
+  pinMode(LED, OUTPUT); 
+  pinMode(APIN, OUTPUT); 
+  pinMode(CPIN, OUTPUT); 
+  pinMode(THPIN, OUTPUT);  
 
   MQ135.setRegressionMethod(1);
   MQ135.init();
@@ -78,11 +86,11 @@ void setup() {
 
 void loop() {  
   ultrasonicController(LED, TRIG, ECHO);
-  co2Controller(MQ135);
-  temperatureController(dht);
-  humidityController(dht);
+  co2Controller(MQ135, APIN);
+  temperatureController(dht, THPIN);
+  humidityController(dht, THPIN);
   luminousController(LSIG);
-  currentController(ACS);
+  currentController(ACS, CPIN);
   lcdController(lcd, keypad);
   sendSerial();
   delay(1000);

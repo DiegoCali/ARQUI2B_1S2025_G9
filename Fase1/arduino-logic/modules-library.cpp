@@ -19,6 +19,36 @@ float liveData[6];
 
 char sensorChar[6] = {'D', 'G', 'T', 'H', 'L', 'C'};
 
+bool errors[4];
+
+void errorHandling(LiquidCrystal_I2C lcd){
+  lcd.clear();
+  lcd.setCursor(0, 0);  
+  lcd.print("Error On Value:");
+  int row = 0;
+  lcd.setCursor(1, row);
+  for (int i = 0; i < 4; i++){
+    if (errors[i]) {      
+      if (i == 3) {
+        lcd.print(sensorChar[i+2]);        
+      } else {
+        lcd.print(sensorChar[i+1]);
+      }      
+    }
+    row++;
+    lcd.setCursor(1, row);
+  }
+}
+
+bool hasError(){
+  for (int i = 0; i < 4; i++){
+    if (errors[i]){
+      return true;
+    }
+  }
+  return false;
+}
+
 void menuPrint(int SCREEN, LiquidCrystal_I2C lcd){
   lcd.clear();
   lcd.setCursor(0, 1);
@@ -105,24 +135,45 @@ void ultrasonicController(int LED, int TRIG, int ECHO){
   liveData[0] = DISTANCE;  
 }
 
-void co2Controller(MQUnifiedsensor MQ135) {  
+void co2Controller(MQUnifiedsensor MQ135, int APIN) {  
   MQ135.update();
   MQ135.setA(110.47);
   MQ135.setB(-2.862);
   float CO2 = MQ135.readSensor(); // leer los valores  
   delay(100);
+  if (CO2 > 8){
+    errors[0] = true;
+    digitalWrite(APIN, HIGH);
+  }else{
+    errors[0] = false;
+    digitalWrite(APIN, LOW);
+  }
   liveData[1] = CO2;
 }
 
-void temperatureController(DHT dht){
+void temperatureController(DHT dht, int THPIN){
   float TEMPERATURE = dht.readTemperature();
   delay(500);
+  if (TEMPERATURE > 30){
+    errors[1] = true;
+    digitalWrite(THPIN, HIGH);
+  }else{
+    errors[1] = false;
+    digitalWrite(THPIN, LOW);
+  }
   liveData[2] = TEMPERATURE;
 }
 
-void humidityController(DHT dht){
+void humidityController(DHT dht, int THPIN){
   float HUMIDITY = dht.readHumidity();
   delay(100);
+  if (HUMIDITY > 75){
+    errors[2] = true;
+    digitalWrite(THPIN, HIGH);
+  }else{
+    errors[2] = false;
+    digitalWrite(THPIN, LOW);
+  }
   liveData[3] = HUMIDITY;
 }
 
@@ -134,17 +185,28 @@ void luminousController(int PHOTO_SIG){
   liveData[4] = luxes;
 }
 
-void currentController(int ACS){
+void currentController(int ACS, int CPIN){
   int raw = analogRead(ACS);
   float voltage = (raw/1023.0) * 5.0;
   if (voltage < 2.5) voltage = 2.5;
-  float mA = (voltage - zeroCurrentVoltage)/sensivity;
+  float mA = (voltage - zeroCurrentVoltage)/sensivity * 1000;
   delay(100);
+  if (mA > 100 || mA < 50){
+    errors[3] = true;
+    digitalWrite(CPIN, HIGH);
+  }else{
+    errors[3] = false;
+    digitalWrite(CPIN, HIGH);
+  }
   liveData[5] = mA;
 }
 
 void lcdController(LiquidCrystal_I2C lcd, Keypad keypad){
   lcd_key = keypad.getKey();
+  if (hasError()) {   
+    errorHandling(lcd);
+    return;
+  }
   if (menu_active) {
     switch (lcd_key) {
       case '2':
