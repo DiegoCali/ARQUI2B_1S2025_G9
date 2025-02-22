@@ -161,11 +161,11 @@ void draw() {
         String[] data = split(val, ";");
         if (data.length == 6){
             distance = float(data[0])/100;
-            co2 = float(data[1])/10;
+            co2 = float(data[1])/100;
             temperature = float(data[2])/100;
             humidity = float(data[3])/100;
-            light = int(int(data[4])/100) == 0;
-            current = int(data[5]);
+            light = !(int(data[4]) < 300);
+            current = float(data[5]);
         }
     }
 
@@ -202,11 +202,11 @@ void draw() {
     drawCo2Gauge(co2);
 
     // write current value     
-    if ( current <= 5 && current > 4){
+    if ( current <= 1 && current > 0.5){
         fill(0);        
-        text("Current: " + current + "mA", width/2 + 10, height - 10);
+        text("Current: " + current + "A", width/2 + 10, height - 10);
     }else {
         fill(255, 0, 0);
-        text("[ERROR] Current: " + current + "mA", width/2 + 10, height - 10);
+        text("[ERROR] Current: " + current + "A", width/2 + 10, height - 10);
     }    
 }

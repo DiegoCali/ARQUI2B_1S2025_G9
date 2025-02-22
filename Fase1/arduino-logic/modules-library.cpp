@@ -3,7 +3,7 @@
 float DISTANCE = 0;
 float ECHO_TIME = 0;
 
-const float sensivity = 0.185;
+const float sensivity = 0.100; // For the 20A
 const float zeroCurrentVoltage = 2.5;
 
 const float A = 675.0;
@@ -106,7 +106,11 @@ void printData(bool live, LiquidCrystal_I2C lcd){
     lcd.print(":");
     colOffset += 2;
     lcd.setCursor(colOffset, rowOffset);
-    lcd.print(int(data[i]));
+    if (i == 5){
+      lcd.print(data[i]);  
+    } else {
+      lcd.print(int(data[i]));
+    }
     colOffset += 3;
   }
 }
@@ -185,20 +189,20 @@ void luminousController(int PHOTO_SIG){
   liveData[4] = luxes;
 }
 
-void currentController(int ACS, int CPIN){
+void currentController(int ACS, int CPIN){  
   int raw = analogRead(ACS);
   float voltage = (raw/1023.0) * 5.0;
-  if (voltage < 2.5) voltage = 2.5;
-  float mA = (voltage - zeroCurrentVoltage)/sensivity * 1000;
+  //if (voltage < 2.5) voltage = 2.5;
+  float A = ((zeroCurrentVoltage - voltage)/sensivity);
   delay(100);
-  if (mA > 100 || mA < 50){
+  if (A > 1 || A < 0.5){
     errors[3] = true;
     digitalWrite(CPIN, HIGH);
   }else{
     errors[3] = false;
-    digitalWrite(CPIN, HIGH);
+    digitalWrite(CPIN, LOW);
   }
-  liveData[5] = mA;
+  liveData[5] = A;
 }
 
 void lcdController(LiquidCrystal_I2C lcd, Keypad keypad){
