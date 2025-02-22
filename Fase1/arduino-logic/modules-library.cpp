@@ -212,9 +212,12 @@ void currentController(int ACS, int CPIN){
 void lcdController(LiquidCrystal_I2C lcd, Keypad keypad){
   lcd_key = keypad.getKey();
   if (hasError()) {   
+    Serial.print("Error");
     errorHandling(lcd);
     return;
   }
+  lcd.clear();
+  menuPrint(screen, lcd);
   if (menu_active) {
     switch (lcd_key) {
       case '2':
