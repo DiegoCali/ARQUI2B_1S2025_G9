@@ -202,7 +202,7 @@ void draw() {
     drawCo2Gauge(co2);
 
     // write current value     
-    if ( current <= 1 && current > 0.5){
+    if ( current <= 1.2 && current > 0.5){
         fill(0);        
         text("Current: " + current + "A", width/2 + 10, height - 10);
     }else {

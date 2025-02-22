@@ -30,10 +30,14 @@ void errorHandling(LiquidCrystal_I2C lcd){
   for (int i = 0; i < 4; i++){
     if (errors[i]) {      
       if (i == 3) {
-        lcd.print(sensorChar[i+2]);        
-      } else {
-        lcd.print(sensorChar[i+1]);
-      }      
+        lcd.print(sensorChar[5]);        
+      } else if (i == 2) {
+        lcd.print(sensorChar[3]);
+      } else if (i == 1) {
+        lcd.print(sensorChar[2]);
+      } else if (i == 0) {
+        lcd.print(sensorChar[1]);
+      }         
     }
     row++;
     lcd.setCursor(1, row);
@@ -68,7 +72,7 @@ void saveEEPROM(){
 }
 
 float* getEEPROM(){
-  static float response[5];
+  static float response[6];
   int offset = 0;
   for (int i = 0; i < 6; i++){
     EEPROM.get(offset, response[i]);
@@ -195,7 +199,7 @@ void currentController(int ACS, int CPIN){
   //if (voltage < 2.5) voltage = 2.5;
   float A = ((zeroCurrentVoltage - voltage)/sensivity);
   delay(100);
-  if (A > 1 || A < 0.5){
+  if (A > 1.2 || A < 0.5){
     errors[3] = true;
     digitalWrite(CPIN, HIGH);
   }else{
