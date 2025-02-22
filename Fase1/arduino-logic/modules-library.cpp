@@ -25,8 +25,7 @@ void errorHandling(LiquidCrystal_I2C lcd){
   lcd.clear();
   lcd.setCursor(0, 0);  
   lcd.print("Error On Value:");
-  int row = 0;
-  lcd.setCursor(1, row);
+  lcd.setCursor(1, 0);
   for (int i = 0; i < 4; i++){
     if (errors[i]) {      
       if (i == 3) {
@@ -39,8 +38,7 @@ void errorHandling(LiquidCrystal_I2C lcd){
         lcd.print(sensorChar[1]);
       }         
     }
-    row++;
-    lcd.setCursor(1, row);
+    lcd.setCursor(1, i+1);
   }
 }
 
@@ -212,7 +210,6 @@ void currentController(int ACS, int CPIN){
 void lcdController(LiquidCrystal_I2C lcd, Keypad keypad){
   lcd_key = keypad.getKey();
   if (hasError()) {   
-    Serial.print("Error");
     errorHandling(lcd);
     return;
   }
