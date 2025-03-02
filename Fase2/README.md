@@ -5,7 +5,7 @@
 - Maqueta: Renovación y mejora. Encargados: Diego y Daniel.
 - API 1: Guardado de datos en la nube. Encargada: Natalia.
 - API 2: Recuperación de datos de la nube + Dashboard. Encargado: Bruce.
-> [!IMPORTANT] Documentación
+> [!IMPORTANT] 
 > Es importante que comenten su código para hacer la documentación posteriormente.
 ## ¿Cómo hacer commits?
 ---
