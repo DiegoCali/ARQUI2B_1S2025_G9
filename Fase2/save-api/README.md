@@ -27,6 +27,6 @@ Se deben leer los datos seriales, limpiarlos si es posible y mandarlos directame
     "date-time": "YYYY-MM-DDTHH:MM:SSZ"
 }
 ```
-> [!IMPORTANT] Schema
+> [!IMPORTANT]
 > Ademas de los datos de los sensores se deberá agregar un parámetro date-time para tener un record en la base de datos.
 *La API se puede hacer con NodeJs o Python*
