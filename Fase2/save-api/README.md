@@ -11,7 +11,7 @@ Donde todos serán valores flotantes, sus dimencionales son las siguientes:
 - co2 = ppm
 - temperature = centigrados
 - humidity = porcentage
-- light = luxes *Ver tabla de luxes al final*
+- light = luxes (*Ver tabla de luxes al final*)
 - current = amp
 ## Proceso:
 ---
