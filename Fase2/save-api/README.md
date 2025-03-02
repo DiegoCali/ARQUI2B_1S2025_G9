@@ -11,7 +11,7 @@ Donde todos serán valores flotantes, sus dimencionales son las siguientes:
 - co2 = ppm
 - temperature = centigrados
 - humidity = porcentage
-- light = luxes ![mas info](https://images.squarespace-cdn.com/content/v1/60ee5f1d1975912dcfd14233/d2b8e35f-e8f9-42ff-b3a0-8d43e494dbd3/Ejemplo+de+niveles+de+luxes+permisibles+seg%C3%BAn+%C3%A1rea+de+trabajo.jpg)
+- light = luxes *Ver tabla de luxes al final*
 - current = amp
 ## Proceso:
 ---
@@ -30,3 +30,6 @@ Se deben leer los datos seriales, limpiarlos si es posible y mandarlos directame
 > [!IMPORTANT]
 > Ademas de los datos de los sensores se deberá agregar un parámetro date-time para tener un record en la base de datos.
 *La API se puede hacer con NodeJs o Python*
+## Tabla de Luxes:
+---
+![luxes](https://images.squarespace-cdn.com/content/v1/60ee5f1d1975912dcfd14233/d2b8e35f-e8f9-42ff-b3a0-8d43e494dbd3/Ejemplo+de+niveles+de+luxes+permisibles+seg%C3%BAn+%C3%A1rea+de+trabajo.jpg)
