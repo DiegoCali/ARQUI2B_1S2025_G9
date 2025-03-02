@@ -11,7 +11,7 @@ Donde todos serán valores flotantes, sus dimencionales son las siguientes:
 - co2 = ppm
 - temperature = centigrados
 - humidity = porcentage
-- light = luxes ![mas info](https://todovisual.com/luminosidades-x-area.htm)
+- light = luxes ![mas info](https://todovisual.com/luminosidades-x-area.html)
 - current = amp
 ## Proceso:
 ---
