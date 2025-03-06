@@ -33,3 +33,21 @@ Se deben leer los datos seriales, limpiarlos si es posible y mandarlos directame
 ## Tabla de Luxes:
 ---
 ![luxes](https://images.squarespace-cdn.com/content/v1/60ee5f1d1975912dcfd14233/d2b8e35f-e8f9-42ff-b3a0-8d43e494dbd3/Ejemplo+de+niveles+de+luxes+permisibles+seg%C3%BAn+%C3%A1rea+de+trabajo.jpg)
+
+
+## ¿Cómo correr la API?
+
+```
+    npm install mysql2
+    node save_api.js
+```    
+
+Es necesario modificar el puerto segun el puerto que este usando el arduino y eliminar el insert quemado que esta en desde la linea 50 a la 84
+
+
+```
+    const serialPort = new SerialPort({
+        path: 'COM3', // como estoy en window usa com, linux usa distinto puerto
+        baudRate: 9600,
+    });
+```
