@@ -25,7 +25,7 @@ function getMySQLDateTime() {
 
 // PUERTO SERIAL -> Configurar segun sea necesario
 const serialPort = new SerialPort({
-    path: 'COM3', // como estoy en window usa com, linux usa distinto puerto
+    path: '/dev/ttyACM0', // como estoy en window usa com, linux usa distinto puerto
     baudRate: 9600,
 });
 
@@ -46,7 +46,7 @@ dbConnection.connect((err) => {
         console.error('Error intentando conectar a la db:', err);
     } else {
         console.log('¡Conexión a la db realizada!');
-
+        /*
 //-----------------eliminar esto al conectar con arduino------------------------------
         // Insertar datos dummy para probar la conexión
         const dummyData = {
@@ -82,6 +82,7 @@ dbConnection.connect((err) => {
             }
         });
  //-----------------eliminar esto al conectar con arduino------------------------------
+    */
     }
 });
 
@@ -110,11 +111,11 @@ parser.on('data', (data) => {
         // solo guarda lo ultimo, hasta ahora no tiene funcionalidad
         latestData = dataUnit;
         console.log('Informacion recibida:', dataUnit);
-
+        
         // Aca se inserta la info a la tabla
         const insertQuery = `
             INSERT INTO sensor_data 
-                (distance, co2, temperature, humidity, light, current, timestamp) 
+                (distance, co2, temperature, humidity, light, current, date_time) 
             VALUES (?, ?, ?, ?, ?, ?, ?)
         `;
         const values = [
