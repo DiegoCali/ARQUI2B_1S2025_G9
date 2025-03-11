@@ -1,0 +1,884 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-layout-mode="detached" data-topbar-color="dark" data-sidenav-user="true">
+
+
+<head>
+        <meta charset="utf-8" />
+        <title>Arqui2 Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
+        <meta content="Coderthemes" name="author" />
+
+        <!-- App favicon -->
+        <link rel="shortcut icon" href="{% static  'assets/images/favicon.ico' %}"">
+
+        <!-- Plugins css -->
+        <link href="{% static  'assetsFundamental/libs/flatpickr/flatpickr.min.css ' %}" rel="stylesheet" type="text/css" />
+        <link href="{% static  'assetsFundamental/libs/selectize/css/selectize.bootstrap3.css ' %}" rel="stylesheet" type="text/css" />
+        
+        <!-- Theme Config Js -->
+        <script src="{% static  'assets/js/head.js' %}"></script>
+
+        <!-- Bootstrap css -->
+        <link href="{% static  'assets/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" id="app-style" />
+
+        <!-- App css -->
+        <link href="{% static  'assets/css/app.min.css' %}" rel="stylesheet" type="text/css" />
+
+        <!-- Icons css -->
+        <link href="{% static  'assetsFundamental/css/icons.min.css' %}" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" 
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.css" integrity="sha512-kJlvECunwXftkPwyvHbclArO8wszgBGisiLeuDFwNM8ws+wKIw0sv1os3ClWZOcrEB2eRXULYUsm8OVRGJKwGA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" integrity="sha512-XcIsjKMcuVe0Ucj/xgIXQnytNwBttJbNjltBV18IOnru2lDPe9KRRyvCXw6Y5H415vbBLRm8+q6fmLUU7DfO6Q==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- choose one -->
+
+
+    </head>
+
+    <body>
+
+        <!-- Begin page -->
+        <div id="wrapper">
+
+            
+            <!-- ========== Menu ========== -->
+            <div class="app-menu">  
+
+                <!-- Brand Logo -->
+                <div class="logo-box">
+                    <!-- Brand Logo Light -->
+                    <a href="index.html" class="logo-light" style="font-size: 1.5em; padding-top: 20px;">
+                        <p>ARQUI2</p>
+                    </a>
+
+                    <!-- Brand Logo Dark -->
+                    <a href="index.html" class="logo-dark" style="font-size: 1.5em; padding-top: 20px;">
+                        <p>ARQUI2</p>
+                    </a>
+                </div>
+
+                <!-- menu-left -->
+                <div class="scrollbar">
+
+                    <!-- User box -->
+                   
+                    <!--- Menu -->
+                    <ul class="menu">
+
+                        <li class="menu-title">Menu</li>
+
+                        <li class="menu-item">
+                            <a href="#menuDashboards" data-bs-toggle="collapse" class="menu-link">
+                                <span class="menu-icon"><i data-feather="airplay"></i></span>
+                                <span class="menu-text"> Dashboards </span>
+                                <span class="badge bg-success rounded-pill ms-auto">4</span>
+                            </a>
+                            <div class="collapse" id="menuDashboards">
+                                <ul class="sub-menu">
+                                    <li class="menu-item">
+                                        <a href="index.html" class="menu-link">
+                                            <span class="menu-text">Resumen </span>
+                                        </a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a href="dashboard-2.html" class="menu-link">
+                                            <span class="menu-text">Detallado</span>
+                                        </a>
+                                    </li>
+                                    
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li class="menu-title">Configuraciones</li>
+
+                
+                        <li class="menu-item">
+                            <a href="apps-companies.html" class="menu-link">
+                                <span class="menu-icon"><i data-feather="activity"></i></span>
+                                <span class="menu-text"> Estadisticas </span>
+                            </a>
+                        </li>
+
+
+                        <li class="menu-item">
+                            <a href="apps-companies.html" class="menu-link">
+                                <span class="menu-icon"><i data-feather="briefcase"></i></span>
+                                <span class="menu-text"> Datos </span>
+                            </a>
+                        </li>
+
+       
+
+                        <li class="menu-title">Documentacion</li>
+                        <li class="menu-item">
+                            <a href="apps-companies.html" class="menu-link">
+                                <span class="menu-icon"><i data-feather="github"></i></span>
+                                <span class="menu-text"> GitHub </span>
+                            </a>
+                        </li>
+
+
+                        <li class="menu-item">
+                            <a href="apps-companies.html" class="menu-link">
+                                <span class="menu-icon"><i data-feather="archive"></i></span>
+                                <span class="menu-text"> Documentacion </span>
+                            </a>
+                        </li>
+
+                    </ul>
+                    <!--- End Menu -->
+                    <div class="clearfix"></div>
+                </div>
+            </div>
+            <!-- ========== Left menu End ========== -->
+
+            
+
+            
+
+            <!-- ============================================================== -->
+            <!-- Start Page Content here -->
+            <!-- ============================================================== -->
+
+            <div class="content-page">
+
+                <!-- ========== Topbar Start ========== -->
+                <div class="navbar-custom">
+                    <div class="topbar">
+                        <div class="topbar-menu d-flex align-items-center gap-1">
+
+                            <!-- Topbar Brand Logo -->
+                            <div class="logo-box">
+                                <!-- Brand Logo Light -->
+                                <a href="index.html" class="logo-light">
+                                    <img src="{% static  'assets/images/logo-light.png' %}" alt="logo" class="logo-lg">
+                                    <img src="{% static  'assets/images/logo-sm.png' %}" alt="small logo" class="logo-sm">
+                                </a>
+
+                                <!-- Brand Logo Dark -->
+                                <a href="index.html" class="logo-dark">
+                                    <img src="{% static  'assets/images/logo-dark.png' %}" alt="dark logo" class="logo-lg">
+                                    <img src="{% static  'assets/images/logo-sm.png' %}" alt="small logo" class="logo-sm">
+                                </a>
+                            </div>
+
+                            <!-- Sidebar Menu Toggle Button -->
+                            <button class="button-toggle-menu">
+                                <i class=" fas fa-align-justify "></i>
+                            </button>
+
+                            <!-- Dropdown Menu -->
+                            <div class="dropdown d-none d-xl-block">
+                                <a class="nav-link dropdown-toggle waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                    Opciones Rapidas
+                                    <i class=" fas fa-angle-down  ms-1"></i>
+                                </a>
+                                <div class="dropdown-menu">
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">
+                                        <i class="fas fa-angle-right"></i>
+                                        <span>Estadisticas</span>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item">
+                                        <i class="fas fa-angle-right"></i>
+                                        <span>Datos</span>
+                                    </a>
+
+                                    <a href="javascript:void(0);" class="dropdown-item">
+                                        <i class="fas fa-angle-right"></i>
+                                        <span>Documentacion</span>
+                                    </a>
+
+
+                                    <div class="dropdown-divider"></div>
+
+                                    <!-- item-->
+                                    <a href="javascript:void(0);" class="dropdown-item">
+                                        <i class="fas fa-question me-1"></i>
+                                        <span>Ayuda & Suporte</span>
+                                    </a>
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <ul class="topbar-menu d-flex align-items-center">
+                            <!-- Topbar Search Form -->
+
+                            <!-- Fullscreen Button -->
+                            <li class="d-none d-md-inline-block">
+                                <a class="nav-link waves-effect waves-light" href="#" data-toggle="fullscreen">
+                                    <i class="fas fa-expand font-22" style="font-size: 0.4em;"></i>
+                                </a>
+                            </li>
+
+                            <!-- Search Dropdown (for Mobile/Tablet) -->
+                       
+
+              
+
+       
+
+                            <!-- Light/Dark Mode Toggle Button -->
+                            <li class="d-none d-sm-inline-block">
+                                <div class="nav-link waves-effect waves-light" id="light-dark-mode">
+                                    <i class="ri-moon-line font-22"></i>
+                                </div>
+                            </li>
+                            <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false" aria-expanded="false">
+                                <img src="{% static  'assets/images/users/user-1.jpg' %}" alt="user-image" class="rounded-circle">
+                                <span class="ms-1 d-none d-md-inline-block">
+                                    Grupo 4
+                                </span>
+                            </a>
+                            <!-- User Dropdown -->
+                 
+
+                            <!-- Right Bar offcanvas button (Theme Customization Panel) -->
+                            <li>
+                                <a class="nav-link waves-effect waves-light" data-bs-toggle="offcanvas" href="#theme-settings-offcanvas">
+                                    <i class="fas fa-circle font-22"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- ========== Topbar End ========== -->
+
+                <div class="content">
+
+                    <!-- Start Content-->
+                    <div class="container-fluid">
+                        
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="page-title-box">
+                                    <div class="page-title-right">
+                               
+                                    </div>
+                                    <h4 class="page-title">Dashboard</h4>
+                                </div>
+                            </div>
+                        </div>     
+
+
+                        <!-- Los menu ociones iniciales -->
+                        <!-- <div class="row">
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-soft-danger border-primary border">
+                                                    <i class="fe-heart font-22 avatar-title text-primary"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1">$<span data-plugin="counterup">58,947</span></h3>
+                                                    <p class="text-muted mb-1 text-truncate">Total Revenue</p>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div> 
+                            </div> 
+                            
+
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-soft-success border-success border">
+                                                    <i class="fe-shopping-cart font-22 avatar-title text-success"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">127</span></h3>
+                                                    <p class="text-muted mb-1 text-truncate">Today's Sales</p>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div> 
+                            </div> 
+
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-soft-info border-info border">
+                                                    <i class="fe-bar-chart-line- font-22 avatar-title text-info"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">0.58</span>%</h3>
+                                                    <p class="text-muted mb-1 text-truncate">Conversion</p>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div> 
+                            </div> 
+
+                            <div class="col-md-6 col-xl-3">
+                                <div class="widget-rounded-circle card">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="avatar-lg rounded-circle bg-soft-warning border-warning border">
+                                                    <i class="fe-eye font-22 avatar-title text-warning"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="text-end">
+                                                    <h3 class="text-dark mt-1"><span data-plugin="counterup">78.41</span>k</h3>
+                                                    <p class="text-muted mb-1 text-truncate">Today's Visits</p>
+                                                </div>
+                                            </div>
+                                        </div> 
+                                    </div>
+                                </div> 
+                            </div> 
+                            
+                        </div> -->
+                        <!-- end row-->
+
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Exportar Reporte</a>
+                                                
+                                            </div>
+                                        </div>
+    
+                                        <h4 class="header-title mb-0">Temperatura</h4>
+    
+                                        <div class="widget-chart text-center" dir="ltr">
+                                            
+                                            <div id="total-temperature" class="mt-0"  data-colors="#f1556c"></div>
+    
+                                            <h5 class="text-muted mt-0">Temperatura actual</h5>
+                                            <h2>178 Grados</h2>
+    
+                                            <p class="text-muted w-75 mx-auto sp-line-2">Esta temperatura, representa la que tiene actualmente la habitacion del Datacenter</p>
+    
+                                            
+                                        </div>
+                                    </div>
+                                </div> <!-- end card -->
+                            </div> 
+
+                            <!-- CO2 -->
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Exportar Reporte</a>
+                                                
+                                            </div>
+                                        </div>
+    
+                                        <h4 class="header-title mb-0">Humedad</h4>
+    
+                                        <div class="widget-chart text-center" dir="ltr">
+                                            
+                                            <div id="total-humedad" class="mt-0"  data-colors="#6658dd"></div>
+    
+                                            <h5 class="text-muted mt-0">Humedad actual</h5>
+                                            <h2>17</h2>
+    
+                                            <p class="text-muted w-75 mx-auto sp-line-2">Esta Humedad, representa la Humedad actual de la habitacion del Datacenter</p>
+    
+                                            
+                                        </div>
+                                    </div>
+                                </div> <!-- end card -->
+                            </div> 
+
+                            <div class="col-lg-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Exportar Reporte</a>
+                                                
+                                            </div>
+                                        </div>
+    
+                                        <h4 class="header-title mb-0">CO2</h4>
+    
+                                        <div class="widget-chart text-center" dir="ltr">
+                                            
+                                            <div id="total-co2" class="mt-0"  data-colors="#6658dd"></div>
+    
+                                            <h5 class="text-muted mt-0">Nivel de CO2 actual</h5>
+                                            <h2>125</h2>
+    
+                                            <p class="text-muted w-75 mx-auto sp-line-2">Este nivel de CO2, representa el CO2 actual de la habitacion del Datacenter</p>
+    
+                                            
+                                        </div>
+                                    </div>
+                                </div> <!-- end card -->
+                            </div> 
+                            
+                        </div>
+                        <!-- end row -->
+                        <div class="row">
+                            <div class="col-12">
+                                <!-- Portlet card -->
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="card-widgets">
+                                            <a href="javascript: void(0);" data-bs-toggle="reload"><i class="mdi mdi-refresh"></i></a>
+                                            <a data-bs-toggle="collapse" href="#cardCollpase1" role="button" aria-expanded="false" aria-controls="cardCollpase1"><i class="mdi mdi-minus"></i></a>
+                                            <a href="javascript: void(0);" data-bs-toggle="remove"><i class="mdi mdi-close"></i></a>
+                                        </div>
+                                        <h4 class="header-title mb-0">Graficas</h4>
+
+                                        <div id="cardCollpase1" class="collapse show" dir="ltr">
+                                            <div class="row pt-3">
+                                                <div class="col-md-4">
+                                                    <h5 id="currentValue"></h5>
+                                                    <div id="spark1" class="apex-charts mb-sm-0 mb-4" data-colors="#6658dd"></div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h5 id="lightCurrent"></h5>
+                                                    <div id="spark2" class="apex-charts mb-sm-0 mb-4" data-colors="#DCE6EC"></div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <h5 id="proximityValue"></h5>
+                                                    <div id="spark3" class="apex-charts" data-colors="#f672a7"></div>
+                                                </div>
+                                            </div> 
+                                        </div> <!-- collapsed end -->
+                                    </div> <!-- end card-body -->
+                                </div> <!-- end card-->
+                            </div> <!-- end col-->
+                        </div>
+                        <div class="row">
+                            <div class="col-xl-12">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="dropdown float-end">
+                                            <a href="#" class="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                                <i class="mdi mdi-dots-vertical"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Edit Report</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Export Report</a>
+                                                <!-- item-->
+                                                <a href="javascript:void(0);" class="dropdown-item">Action</a>
+                                            </div>
+                                        </div>
+    
+                                        <h4 class="header-title mb-3">Datos registrados</h4>
+    
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <p class="text-muted font-13 mb-4">
+                                                    Datos respecto a los sensores
+                                                    <code>Datacenter</code>.
+                                                </p>
+                                                <div class="row">
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="example-date" class="form-label">Fecha Inicial</label>
+                                                            <input class="form-control" id="actualDate" type="datetime-local" name="date">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6">
+                                                        <div class="mb-3">
+                                                            <label for="example-date" class="form-label">Fecha Final</label>
+                                                            <input class="form-control" id="finalDate" type="datetime-local" name="date">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                                
+        
+                                                <table id="basic-datatable" class="table dt-responsive nowrap w-100">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Distancia</th>
+                                                            <th>Co2</th>
+                                                            <th>Temperatura</th>
+                                                            <th>Humedad</th>
+                                                            <th>Luz</th>
+                                                            <th>Corriente</th>
+                                                            <th>Fecha</th>
+                                                        </tr>
+                                                    </thead>
+                                                
+                                                
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>100</td>
+                                                            <td>400</td>
+                                                            <td>22.5</td>
+                                                            <td>50.3</td>
+                                                            <td>200.2</td>
+                                                            <td>5.1</td>
+                                                            <td>2025-03-05 21:52:47</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>100</td>
+                                                            <td>400</td>
+                                                            <td>22.5</td>
+                                                            <td>50.3</td>
+                                                            <td>200.2</td>
+                                                            <td>5.1</td>
+                                                            <td>2025-03-05 21:54:47</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>100</td>
+                                                            <td>400</td>
+                                                            <td>22.5</td>
+                                                            <td>50.3</td>
+                                                            <td>200.2</td>
+                                                            <td>5.1</td>
+                                                            <td>2025-03-05 21:55:47</td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+        
+                                            </div> <!-- end card body-->
+                                        </div> <!-- end card -->
+                                        <!-- Third Party js-->
+                                        <script src="{% static  'assetsFundamental/libs/apexcharts/apexcharts.min.js' %}"></script>
+                                        <script src="../../../../apexcharts.com/samples/assets/irregular-data-series.js"></script>
+                                        <script src="../../../../apexcharts.com/samples/assets/ohlc.js"></script>
+                                
+                                        <!-- init js -->
+                                        <script src="{% static  'assets/js/pages/apexcharts.init.js"></script>
+                                
+                                    </div>
+                                </div>
+                            </div> <!-- end col -->
+
+                        </div>
+                        <!-- end row -->
+                        
+                    </div> <!-- container -->
+
+                </div> <!-- content -->
+
+                <!-- Footer Start -->
+                <footer class="footer">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div><script>document.write(new Date().getFullYear())</script> © Devscapital - <a href="https://devscapital.com/" target="_blank">Devscapital.com</a></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="d-none d-md-flex gap-4 align-item-center justify-content-md-end footer-links">
+                                    <a href="javascript: void(0);">Nosotros</a>
+                                    <a href="javascript: void(0);">Support</a>
+                                    <a href="javascript: void(0);">Contact Us</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>' %}
+                </footer>
+                <!-- end Footer -->
+
+            </div>
+
+            <!-- ============================================================== -->
+            <!-- End Page content -->
+            <!-- ============================================================== -->
+
+        </div>
+        <!-- END wrapper -->
+
+        <!-- Theme Settings -->
+        <div class="offcanvas offcanvas-end right-bar" tabindex="-1" id="theme-settings-offcanvas">
+            <div class="d-flex align-items-center w-100 p-0 offcanvas-header">
+                <!-- Nav tabs -->
+                <ul class="nav nav-tabs nav-bordered nav-justified w-100" role="tablist">
+             
+        
+                    <li class="nav-item">
+                        <a class="nav-link py-2 active" data-bs-toggle="tab" href="#settings-tab" role="tab">
+                            <i class="mdi mdi-cog-outline d-block font-22 my-1"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="offcanvas-body p-3 h-100" data-simplebar>
+                <!-- Tab panes -->
+                <div class="tab-content pt-0">
+           
+
+                    <div class="tab-pane active" id="settings-tab" role="tabpanel">
+
+                        <div class="mt-n3">
+                            <h6 class="fw-medium py-2 px-3 font-13 text-uppercase bg-light mx-n3 mt-n3 mb-3">
+                                <span class="d-block py-1">Configuracion</span>
+                            </h6>
+                        </div>
+
+                        <div class="alert alert-warning" role="alert">
+                            <strong>Configura </strong> el dashboard a tu preferencia
+                        </div>
+
+                        <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Color Tema</h5>
+
+                        <div class="colorscheme-cardradio">
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-light" value="light">
+                                    <label class="form-check-label" for="layout-color-light">Light</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-bs-theme" id="layout-color-dark" value="dark">
+                                    <label class="form-check-label" for="layout-color-dark">Dark</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Contenido</h5>
+                        <div class="d-flex flex-column gap-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="data-layout-width" id="layout-width-default" value="default">
+                                <label class="form-check-label" for="layout-width-default">Fluid (Default)</label>
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="data-layout-width" id="layout-width-boxed" value="boxed">
+                                <label class="form-check-label" for="layout-width-boxed">Boxed</label>
+                            </div>
+                        </div>
+
+                        <div id="layout-mode">
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Layout</h5>
+
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-default" value="default">
+                                    <label class="form-check-label" for="layout-mode-default">Default</label>
+                                </div>
+
+
+                                <div id="layout-detached">
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" name="data-layout-mode" id="layout-mode-detached" value="detached">
+                                        <label class="form-check-label" for="layout-mode-detached">Detached</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Barra color</h5>
+
+                        <div class="d-flex flex-column gap-2">
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-light" value="light">
+                                <label class="form-check-label" for="topbar-color-light">Light</label>
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-dark" value="dark">
+                                <label class="form-check-label" for="topbar-color-dark">Dark</label>
+                            </div>
+
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" name="data-topbar-color" id="topbar-color-brand" value="brand">
+                                <label class="form-check-label" for="topbar-color-brand">Brand</label>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Menu Color</h5>
+
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-light" value="light">
+                                    <label class="form-check-label" for="leftbar-color-light">Light</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-dark" value="dark">
+                                    <label class="form-check-label" for="leftbar-color-dark">Dark</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-brand" value="brand">
+                                    <label class="form-check-label" for="leftbar-color-brand">Brand</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-menu-color" id="leftbar-color-gradient" value="gradient">
+                                    <label class="form-check-label" for="leftbar-color-gradient">Gradient</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="menu-icon-color">
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Menu Icon Color</h5>
+
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-two-column-color" id="twocolumn-menu-color-light" value="light">
+                                    <label class="form-check-label" for="twocolumn-menu-color-light">Light</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-two-column-color" id="twocolumn-menu-color-dark" value="dark">
+                                    <label class="form-check-label" for="twocolumn-menu-color-dark">Dark</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-two-column-color" id="twocolumn-menu-color-brand" value="brand">
+                                    <label class="form-check-label" for="twocolumn-menu-color-brand">Brand</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-two-column-color" id="twocolumn-menu-color-gradient" value="gradient">
+                                    <label class="form-check-label" for="twocolumn-menu-color-gradient">Gradient</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Menu Icon Tone</h5>
+
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-menu-icon" id="menu-icon-default" value="default">
+                                    <label class="form-check-label" for="menu-icon-default">Default</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-menu-icon" id="menu-icon-twotone" value="twotones">
+                                    <label class="form-check-label" for="menu-icon-twotone">Twotone</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sidebar-size">
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Sidebar Tamaño</h5>
+
+                            <div class="d-flex flex-column gap-2">
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-default" value="default">
+                                    <label class="form-check-label" for="leftbar-size-default">Default</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-compact" value="compact">
+                                    <label class="form-check-label" for="leftbar-size-compact">Compact (Medium Width)</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-small" value="condensed">
+                                    <label class="form-check-label" for="leftbar-size-small">Condensed (Icon View)</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-full" value="full">
+                                    <label class="form-check-label" for="leftbar-size-full">Full Layout</label>
+                                </div>
+
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" name="data-sidenav-size" id="leftbar-size-fullscreen" value="fullscreen">
+                                    <label class="form-check-label" for="leftbar-size-fullscreen">Fullscreen Layout</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="sidebar-user">
+                            <h5 class="fw-medium font-14 mt-4 mb-2 pb-1">Sidebar User Info</h5>
+
+                            <div class="form-check form-switch">
+                                <input type="checkbox" class="form-check-input" name="data-sidebar-user" id="sidebaruser-check">
+                                <label class="form-check-label" for="sidebaruser-check">Enable</label>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="offcanvas-footer border-top py-2 px-2 text-center">
+                <div class="d-flex gap-2">
+                    <button type="button" class="btn btn-light w-50" id="reset-layout">Reset</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Vendor js -->
+        <script src="{% static  'assets/js/vendor.min.js' %}"></script>
+
+        <!-- App js -->
+        <script src="{% static  'assets/js/app.min.js' %}"></script>
+        
+        <!-- Plugins js-->
+        <script src="{% static  'assetsFundamental/libs/flatpickr/flatpickr.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/apexcharts/apexcharts.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/selectize/js/standalone/selectize.min.js' %}"></script>
+
+        <!-- Dashboar 1 init js-->
+        <script src="{% static  'assets/js/pages/dashboard-1.init.js' %}"></script>
+
+
+
+
+        <!-- Third Party js-->
+        <script src="{% static  'assetsFundamental/libs/apexcharts/apexcharts.min.js' %}"></script>
+        <script src="../../../../apexcharts.com/samples/assets/irregular-data-series.js"></script>
+        <script src="../../../../apexcharts.com/samples/assets/ohlc.js"></script>
+
+        <!-- init js -->
+        <script src="{% static  'assets/js/pages/apexcharts.init.js' %}"></script>
+
+        
+        <!-- Datatables init -->
+        <script src="{% static  'assetsFundamental/libs/datatables.net/js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-bs5/js/dataTables.bootstrap5.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-responsive/js/dataTables.responsive.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-responsive-bs5/js/responsive.bootstrap5.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-buttons/js/dataTables.buttons.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-buttons-bs5/js/buttons.bootstrap5.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-buttons/js/buttons.html5.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-buttons/js/buttons.flash.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-buttons/js/buttons.print.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-keytable/js/dataTables.keyTable.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/datatables.net-select/js/dataTables.select.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/pdfmake/build/pdfmake.min.js' %}"></script>
+        <script src="{% static  'assetsFundamental/libs/pdfmake/build/vfs_fonts.js' %}"></script>
+        <script src="{% static  'assets/js/pages/datatables.init.js' %}"></script>
+    </body>
+
+<!-- Mirrored from coderthemes.com/ubold/layouts/modern/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 08 Mar 2025 13:08:42 GMT -->
+</html>
