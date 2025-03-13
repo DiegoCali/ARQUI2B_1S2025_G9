@@ -43,11 +43,12 @@ int SS_PIN = 53;
 MFRC522 mfrc522(SS_PIN, RST_PIN);
 
 // Error leds
-int HEATPIN = 9;
-int AIRPIN = 8;
+int HEATPIN = 8;
+int AIRPIN = 9;
 int THPIN = 7;
 
-Servo DOOR;
+int OPENSERVO = 26;
+int CLOSESERVO = 28;
 
 bool INSERTCARD = false;
 
@@ -64,12 +65,15 @@ void setup() {
   pinMode(BUZZPIN, OUTPUT);
   pinMode(AIRPIN, OUTPUT); 
   pinMode(HEATPIN, OUTPUT); 
-  pinMode(THPIN, OUTPUT);  
+  pinMode(THPIN, OUTPUT); 
+  pinMode(OPENSERVO, OUTPUT);
+  pinMode(CLOSESERVO, OUTPUT); 
 
   digitalWrite(FANPIN, HIGH);
   digitalWrite(DCPIN, HIGH);
 
-  DOOR.attach(2);
+  digitalWrite(OPENSERVO, LOW);
+  digitalWrite(CLOSESERVO, LOW);
 
   SPI.begin();
   mfrc522.PCD_Init();  
@@ -92,9 +96,6 @@ void setup() {
   delay(1000);
   lcd.clear(); 
 
-  DOOR.write(90);
-  delay(500);
-  DOOR.write(0);
 }
 
 void loop() {    
@@ -104,7 +105,7 @@ void loop() {
   humidityController(dht, THPIN, FANPIN);
   luminousController(LSIG, OUTLIGHT);
   currentController(ACS, BUZZPIN);
-  INSERTCARD =doorController(INFRARED, DOOR, lcd, mfrc522);
+  INSERTCARD =doorController(INFRARED, lcd, mfrc522, OPENSERVO, CLOSESERVO);
   if (!INSERTCARD) {
     printData(true, lcd);
   }

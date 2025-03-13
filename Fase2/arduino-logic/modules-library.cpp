@@ -11,6 +11,7 @@ const float B = 0.75;
 
 bool FANRUNNING = false;
 bool KEEPFAN = false;
+bool OPENED = false;
 
 int screen = 1;
 int last_screen = 0;
@@ -129,7 +130,7 @@ void ultrasonicController(int LED, int TRIG, int ECHO){
   DISTANCE = ECHO_TIME/58.2;
   if (DISTANCE > 99 ) DISTANCE = 99.99; 
   
-  if (DISTANCE < 17){
+  if (DISTANCE < 15){
     digitalWrite(LED, HIGH);               
   }
   else{
@@ -180,7 +181,7 @@ void temperatureController(DHT dht, int THPIN, int DCPIN){
 void humidityController(DHT dht, int THPIN, int FANPIN){
   float HUMIDITY = dht.readHumidity();
   delay(100);
-  if (HUMIDITY > 85){
+  if (HUMIDITY > 75){
     errors[2] = true;
     digitalWrite(THPIN, HIGH);
     if (!FANRUNNING){
@@ -230,7 +231,7 @@ void currentController(int ACS, int CPIN){
   liveData[5] = A;
 }
 
-bool doorController(int INFRARED, Servo servo, LiquidCrystal_I2C lcd, MFRC522 mfrc522){
+bool doorController(int INFRARED, LiquidCrystal_I2C lcd, MFRC522 mfrc522, int OPEN, int CLOSE){
   int pos = 0;  
   lcd.clear();
   lcd.setCursor(0, 0);
@@ -239,14 +240,26 @@ bool doorController(int INFRARED, Servo servo, LiquidCrystal_I2C lcd, MFRC522 mf
     lcd.setCursor(0, 1);
     lcd.print("tarjeta");
     while (!digitalRead(INFRARED)) {
-      if (mfrc522.PICC_IsNewCardPresent()) {        
+      if (mfrc522.PICC_IsNewCardPresent() && OPENED) {        
         lcd.clear();
         lcd.setCursor(3, 0);
         lcd.print("Tarjeta");
         lcd.setCursor(3, 1);
         lcd.print("detectada!");
+        digitalWrite(OPEN, HIGH);
+      } else if (OPENED) {
+        lcd.clear();
+        lcd.setCursor(1, 0);
+        lcd.print("Por Favor");
+        lcd.setCursor(1, 1);
+        lcd.print("Entre...");
       }
     }
+    digitalWrite(OPEN, LOW);
+    delay(3000);
+    digitalWrite(CLOSE, HIGH);
+    delay(10);
+    digitalWrite(CLOSE, LOW);
     return true;
   }
   return false;
