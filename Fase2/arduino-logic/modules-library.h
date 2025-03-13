@@ -5,17 +5,18 @@
 #include <Wire.h>
 #include <DHT.h>
 #include <MQUnifiedsensor.h>
-#include <Keypad.h>
 #include <EEPROM.h>
-#include <ACS712.h>
+#include <SPI.h>
+#include <MFRC522.h>
 
 void ultrasonicController(int LED, int TRIG, int ECHO);
-void co2Controller(MQUnifiedsensor MQ135, int APIN);
-void temperatureController(DHT dht, int THPIN);
-void humidityController(DHT dht, int THPIN);
-void luminousController(int PHOTO_SIG);
+void co2Controller(MQUnifiedsensor MQ135, int APIN, int FANPIN);
+void temperatureController(DHT dht, int THPIN, int DCPIN);
+void humidityController(DHT dht, int THPIN, int FANPIN);
+void luminousController(int PHOTO_SIG, int OUTLIGTH);
 void currentController(int ACS, int CPIN);
-void lcdController(LiquidCrystal_I2C lcd, Keypad keypad);
+bool doorController(int INFRARED, LiquidCrystal_I2C lcd, MFRC522 mfrc522, int OPEN, int CLOSE);
+void printData(bool live, LiquidCrystal_I2C lcd);
 void sendSerial();
 
 #endif
