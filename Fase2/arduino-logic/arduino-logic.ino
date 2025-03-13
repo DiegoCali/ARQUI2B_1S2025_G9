@@ -2,7 +2,12 @@
 
 // Initialize PINS
 
-int LED = 11;
+int INLIGHT = 11;
+int OUTLIGHT = 6;
+int FANPIN = 3;
+int DCPIN = 4;
+int BUZZPIN = 24;
+int INFRARED = 22;
 int ECHO = 12;
 int TRIG = 13;
 int LSIG = A1;
@@ -27,39 +32,47 @@ DHT dht(DHTPIN, DHTTYPE);
 
 MQUnifiedsensor MQ135(BOARD, VOLTAGE, ADC_BIT_RES, CO2PIN, TYPE);
 
-const byte numRows = 4;
-const byte numCols = 4;
-
-char keymap[numRows][numCols] = {
-  {'1', '2', '3', 'A'},
-  {'4', '5', '6', 'B'},
-  {'7', '8', '9', 'C'},
-  {'*', '0', '#', 'D'}
-};
-
-byte rowPins[numRows] = {44, 42, 40, 38};
-byte colPins[numRows] = {36, 34, 32, 30};
-
-Keypad keypad = Keypad(makeKeymap(keymap), rowPins, colPins, numRows, numCols);
-
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 int ACS = A2;
 
+// RFID
+int RST_PIN = 5;
+int SS_PIN = 53;
+
+MFRC522 mfrc522(SS_PIN, RST_PIN);
+
 // Error leds
-int APIN = 9;
-int CPIN = 8;
+int HEATPIN = 9;
+int AIRPIN = 8;
 int THPIN = 7;
+
+Servo DOOR;
+
+bool INSERTCARD = false;
 
 void setup() {
   Serial.begin(9600);
 
   pinMode(ECHO, INPUT);
+  pinMode(INFRARED, INPUT);
   pinMode(TRIG, OUTPUT);
-  pinMode(LED, OUTPUT); 
-  pinMode(APIN, OUTPUT); 
-  pinMode(CPIN, OUTPUT); 
+  pinMode(INLIGHT, OUTPUT); 
+  pinMode(OUTLIGHT, OUTPUT);
+  pinMode(FANPIN, OUTPUT);
+  pinMode(DCPIN, OUTPUT);
+  pinMode(BUZZPIN, OUTPUT);
+  pinMode(AIRPIN, OUTPUT); 
+  pinMode(HEATPIN, OUTPUT); 
   pinMode(THPIN, OUTPUT);  
+
+  digitalWrite(FANPIN, HIGH);
+  digitalWrite(DCPIN, HIGH);
+
+  DOOR.attach(2);
+
+  SPI.begin();
+  mfrc522.PCD_Init();  
 
   MQ135.setRegressionMethod(1);
   MQ135.init();
@@ -77,21 +90,24 @@ void setup() {
   lcd.setCursor(0, 0);
   lcd.print("Bienvenidos G9");
   delay(1000);
-  lcd.clear();
+  lcd.clear(); 
 
-  lcd.clear();
-  lcd.setCursor(0, 1);
-  lcd.print("1. Live DATA");  
+  DOOR.write(90);
+  delay(500);
+  DOOR.write(0);
 }
 
-void loop() {  
-  ultrasonicController(LED, TRIG, ECHO);
-  co2Controller(MQ135, APIN);
-  temperatureController(dht, THPIN);
-  humidityController(dht, THPIN);
-  luminousController(LSIG);
-  currentController(ACS, CPIN);
-  lcdController(lcd, keypad);
+void loop() {    
+  ultrasonicController(INLIGHT, TRIG, ECHO);
+  co2Controller(MQ135, AIRPIN, FANPIN);
+  temperatureController(dht, HEATPIN, DCPIN);
+  humidityController(dht, THPIN, FANPIN);
+  luminousController(LSIG, OUTLIGHT);
+  currentController(ACS, BUZZPIN);
+  INSERTCARD =doorController(INFRARED, DOOR, lcd, mfrc522);
+  if (!INSERTCARD) {
+    printData(true, lcd);
+  }
   sendSerial();
   delay(1000);
 }
