@@ -14,7 +14,7 @@ async function fetchSensorData(endpoint) {
     return Object.values(data)[0]; // Extrae el valor numérico
   } catch (error) {
     console.error(`Error en ${endpoint}:`, error);
-    return Math.random() * 100; // Valor aleatorio en caso de error
+    return 0; // Valor aleatorio en caso de error
   }
 }
 
