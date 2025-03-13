@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV /home/bcastillo/Projects/arqui2/ARQUI2B_1S2025_G9/Fase2/retrieve-api/dashboardArqui2/venv
+set -gx VIRTUAL_ENV /home/diego/Documentos/ARQUI2B_1S2025_G9/Fase2/retrieve-api/dashboardArqui2/venv
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/"bin $PATH
