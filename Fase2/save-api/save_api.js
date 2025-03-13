@@ -34,9 +34,9 @@ const parser = serialPort.pipe(new ReadlineParser({ delimiter: '\n' }));
 
 // Conexion con la base en aws
 const dbConnection = mysql.createConnection({
-    host: 'arqui2project.czc68qcuezkl.us-east-2.rds.amazonaws.com',   
-    user: 'admin',
-    password: 'arqui2Project2025*',
+    host: 'arqui2project.cctkkcomupit.us-east-1.rds.amazonaws.com',   
+    user: 'adminArqui2',
+    password: 'Arqui2Project*',
     database: 'arqui2db'
 });
 
