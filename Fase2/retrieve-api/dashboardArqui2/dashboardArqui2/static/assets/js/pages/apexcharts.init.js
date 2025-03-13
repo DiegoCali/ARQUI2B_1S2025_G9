@@ -1,154 +1,121 @@
-(Apex.grid = { padding: { right: 0, left: 0 } }),
-  (Apex.dataLabels = { enabled: false });
+// Configuración general de ApexCharts
+Apex.grid = { padding: { right: 0, left: 0 } };
+Apex.dataLabels = { enabled: false };
 
-var sparklineData = Array.from({ length: 24 }, () => Math.floor(Math.random() * 100));
+// URL de la API (ajustar según sea necesario)
+const API_URL = "http://127.0.0.1:8000"; // Cambia esto si la API está en otro host
 
-var colors = ["#6658dd"];
-var dataColors = $("#spark1").data("colors");
-dataColors && (colors = dataColors.split(","));
-
-var options = {
-  chart: { 
-    type: "area", 
-    height: 160, 
-    sparkline: { enabled: true },
-    animations: {
-      enabled: true,
-      easing: 'easeinout',
-      dynamicAnimation: { speed: 500 } // Suaviza la animación
-    }
-  },
-  stroke: { width: 2, curve: "smooth" },
-  fill: { opacity: 0.3 },
-  series: [{ name: "Corriente actual", data: sparklineData }],
-  yaxis: { min: 0, max: 100 },
-  colors: colors,
-  title: { text: "Corriente", offsetX: 10, style: { fontSize: "22px" } },
-  subtitle: {
-    text: "Amperios",
-    offsetX: 10,
-    offsetY: 35,
-    style: { fontSize: "13px" },
-  },
-  markers: { size: 0 },
-  tooltip: { theme: "dark" }
-};
-
-var chart = new ApexCharts(document.querySelector("#spark1"), options);
-chart.render();
-
-// Mostrar el último valor de amperios en texto
-function updateCurrentValue() {
-  let lastValue = sparklineData[sparklineData.length - 1];
-  document.getElementById("currentValue").innerText = `Corriente: ${lastValue} A`;
-}
-
-// Actualizar los datos y el texto cada 500ms
-// setInterval(() => {
-//   sparklineData.shift();
-//   let newValue = Math.floor(Math.random() * 100);
-//   sparklineData.push(newValue);
-
-//   chart.updateSeries([{ data: sparklineData }]);
-//   updateCurrentValue();
-// }, 500);
-
-
-
-
-
-//light current
-
-(Apex.grid = { padding: { right: 0, left: 0 } }),
-  (Apex.dataLabels = { enabled: false });
-
-var sparklineData = Array.from({ length: 24 }, () => Math.floor(Math.random() * 100));
-
-var colors = ["#6658dd"];
-var dataColors = $("#spark2").data("colors");
-dataColors && (colors = dataColors.split(","));
-
-var options = {
-  chart: { 
-    type: "area", 
-    height: 160, 
-    sparkline: { enabled: true },
-    animations: {
-      enabled: true,
-      easing: 'easeinout',
-      dynamicAnimation: { speed: 500 } // Suaviza la animación
-    }
-  },
-  stroke: { width: 2, curve: "smooth" },
-  fill: { opacity: 0.3 },
-  series: [{ name: "Luz en el ambiente", data: sparklineData }],
-  yaxis: { min: 0, max: 100 },
-  colors: colors,
-  title: { text: "Luz en el ambiente", offsetX: 10, style: { fontSize: "22px" } },
-  subtitle: {
-    text: "Lumen",
-    offsetX: 10,
-    offsetY: 35,
-    style: { fontSize: "13px" },
-  },
-  markers: { size: 0 },
-  tooltip: { theme: "dark" }
-};
-
-var chart = new ApexCharts(document.querySelector("#spark2"), options);
-chart.render();
-
-// Mostrar el último valor de amperios en texto
-function updateLightValue() {
-  let lastValue = sparklineData[sparklineData.length - 1];
-  document.getElementById("lighttValue").innerText = `Corriente: ${lastValue} Lumen`;
+// Función para obtener datos de la API
+async function fetchSensorData(endpoint) {
+  try {
+    const response = await fetch(`${API_URL}/${endpoint}`);
+    if (!response.ok) throw new Error(`Error al obtener ${endpoint}`);
+    const data = await response.json();
+    return Object.values(data)[0]; // Extrae el valor numérico
+  } catch (error) {
+    console.error(`Error en ${endpoint}:`, error);
+    return Math.random() * 100; // Valor aleatorio en caso de error
+  }
 }
 
 
+async function updateRadialChart(chart, endpoint, labelId, unit) {
+  const newValue = await fetchSensorData(endpoint);
 
+  // Actualizar gráfico
+  chart.updateSeries([newValue]);
 
-//Proximity
-(Apex.grid = { padding: { right: 0, left: 0 } }),
-  (Apex.dataLabels = { enabled: false });
-
-var sparklineData = Array.from({ length: 24 }, () => Math.floor(Math.random() * 100));
-
-var colors = ["#6658dd"];
-var dataColors = $("#spark3").data("colors");
-dataColors && (colors = dataColors.split(","));
-
-var options = {
-  chart: { 
-    type: "area", 
-    height: 160, 
-    sparkline: { enabled: true },
-    animations: {
-      enabled: true,
-      easing: 'easeinout',
-      dynamicAnimation: { speed: 500 } // Suaviza la animación
-    }
-  },
-  stroke: { width: 2, curve: "smooth" },
-  fill: { opacity: 0.3 },
-  series: [{ name: "Proximidad actual", data: sparklineData }],
-  yaxis: { min: 0, max: 100 },
-  colors: colors,
-  title: { text: "Proximidad Actual", offsetX: 10, style: { fontSize: "22px" } },
-  subtitle: {
-    text: "Proximidad",
-    offsetX: 10,
-    offsetY: 35,
-    style: { fontSize: "13px" },
-  },
-  markers: { size: 0 },
-  tooltip: { theme: "dark" }
-};
-
-var chart = new ApexCharts(document.querySelector("#spark3"), options);
-chart.render();
-
-// Mostrar el último valor de amperios en texto
-function updateProximityValue() {
-  let lastValue = sparklineData[sparklineData.length - 1];
-  document.getElementById("proximityValue").innerText = `Prximidad: ${lastValue} cm/m`;
+  // Actualizar etiqueta de texto
+  document.getElementById(labelId).innerText = `${newValue.toFixed(2)} ${unit}`;
 }
+
+// Función para crear gráficos radialBar
+function createRadialChart(elementId, title, unit) {
+  let colors = ["#f1556c"];
+  let dataColors = $(`#${elementId}`).data("colors");
+  if (dataColors) colors = dataColors.split(",");
+
+  let options = {
+    series: [0], // Se inicializa con 0 hasta recibir datos reales
+    chart: { height: 242, type: "radialBar" },
+    plotOptions: { radialBar: { hollow: { size: "65%" } } },
+    colors: colors,
+    labels: [title],
+  };
+
+  let chart = new ApexCharts(document.querySelector(`#${elementId}`), options);
+  chart.render();
+
+  return chart;
+}
+
+// Crear gráficos radialBar
+const temperatureChart = createRadialChart("total-temperature", "Temperatura", "°C");
+const humidityChart = createRadialChart("total-humedad", "Humedad", "%");
+const co2Chart = createRadialChart("total-co2", "CO2", "ppm");
+
+// Actualizar datos cada 500ms
+setInterval(() => {
+  updateRadialChart(temperatureChart, "getTemperature", "temperatureValue", "°C");
+  updateRadialChart(humidityChart, "getHumidity", "humidityValue", "%");
+  updateRadialChart(co2Chart, "getCO2", "co2Value", "ppm");
+}, 500);
+
+
+
+// Función genérica para actualizar gráficos
+async function updateChart(chart, dataArray, endpoint, labelId, unit) {
+  const newValue = await fetchSensorData(endpoint);
+  
+  // Actualizar array de datos
+  dataArray.shift();
+  dataArray.push(newValue);
+
+  // Actualizar gráfico
+  chart.updateSeries([{ data: dataArray }]);
+
+  // Actualizar etiqueta de texto
+  document.getElementById(labelId).innerText = `${newValue.toFixed(2)} ${unit}`;
+}
+
+// Configuración de gráficos
+function createChart(elementId, title, unit, seriesName) {
+  let sparklineData = Array.from({ length: 24 }, () => Math.floor(Math.random() * 100));
+  let colors = ["#6658dd"];
+  let dataColors = $(`#${elementId}`).data("colors");
+  if (dataColors) colors = dataColors.split(",");
+
+  let options = {
+    chart: {
+      type: "area",
+      height: 160,
+      sparkline: { enabled: true },
+      animations: { enabled: true, easing: "easeinout", dynamicAnimation: { speed: 10 } }
+    },
+    stroke: { width: 2, curve: "smooth" },
+    fill: { opacity: 0.3 },
+    series: [{ name: seriesName, data: sparklineData }],
+    yaxis: { min: 0, max: 100 },
+    colors: colors,
+    title: { text: title, offsetX: 10, style: { fontSize: "22px" } },
+    subtitle: { text: unit, offsetX: 10, offsetY: 35, style: { fontSize: "13px" } },
+    markers: { size: 0 },
+    tooltip: { theme: "dark" }
+  };
+
+  let chart = new ApexCharts(document.querySelector(`#${elementId}`), options);
+  chart.render();
+
+  return { chart, data: sparklineData };
+}
+
+// Crear gráficos y asignar actualización automática
+const currentChart = createChart("spark1", "Corriente", "Amperios", "Corriente actual");
+const lightChart = createChart("spark2", "Luz en el ambiente", "Lumen", "Luz actual");
+const proximityChart = createChart("spark3", "Proximidad Actual", "cm/m", "Proximidad");
+
+setInterval(() => {
+  updateChart(currentChart.chart, currentChart.data, "getCurrent", "currentValue", "A");
+  updateChart(lightChart.chart, lightChart.data, "getLight", "lightCurrent", "Lumen");
+  updateChart(proximityChart.chart, proximityChart.data, "getDistance", "proximityValue", "cm/m");
+}, 500);
