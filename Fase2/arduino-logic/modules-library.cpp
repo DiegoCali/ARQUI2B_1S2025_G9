@@ -9,6 +9,10 @@ const float zeroCurrentVoltage = 2.5;
 const float A = 675.0;
 const float B = 0.75;
 
+bool FANRUNNING = false;
+bool KEEPFAN = false;
+bool OPENED = false;
+
 int screen = 1;
 int last_screen = 0;
 char lcd_key;
@@ -25,20 +29,20 @@ void errorHandling(LiquidCrystal_I2C lcd){
   lcd.clear();
   lcd.setCursor(0, 0);  
   lcd.print("Error On Value:");
-  lcd.setCursor(1, 0);
+  lcd.setCursor(0, 1);  
   for (int i = 0; i < 4; i++){
     if (errors[i]) {      
       if (i == 3) {
-        lcd.print(sensorChar[5]);        
+        lcd.print("Current="  + String(liveData[5]));        
       } else if (i == 2) {
-        lcd.print(sensorChar[3]);
+        lcd.print("Humidity=" + String(liveData[3]));   
       } else if (i == 1) {
-        lcd.print(sensorChar[2]);
+        lcd.print("Temperature=" + String(liveData[2]));   
       } else if (i == 0) {
-        lcd.print(sensorChar[1]);
+        lcd.print("Gas=" + String(liveData[1]));   
       }         
-    }
-    lcd.setCursor(1, i+1);
+      return;
+    }    
   }
 }
 
@@ -49,16 +53,6 @@ bool hasError(){
     }
   }
   return false;
-}
-
-void menuPrint(int SCREEN, LiquidCrystal_I2C lcd){
-  lcd.clear();
-  lcd.setCursor(0, 1);
-  switch (SCREEN){
-    case 1: lcd.print("1. Live DATA"); break;
-    case 2: lcd.print("2. EEPROM"); break;
-    default: lcd.print("ERROR           "); break;
-  }
 }
 
 void saveEEPROM(){
@@ -80,6 +74,10 @@ float* getEEPROM(){
 }
 
 void printData(bool live, LiquidCrystal_I2C lcd){
+  if (hasError()) {
+    errorHandling(lcd);
+    return;
+  }
   float* data;
   if (live){
     data = liveData;
@@ -132,7 +130,7 @@ void ultrasonicController(int LED, int TRIG, int ECHO){
   DISTANCE = ECHO_TIME/58.2;
   if (DISTANCE > 99 ) DISTANCE = 99.99; 
   
-  if (DISTANCE < 8){
+  if (DISTANCE < 15){
     digitalWrite(LED, HIGH);               
   }
   else{
@@ -141,7 +139,7 @@ void ultrasonicController(int LED, int TRIG, int ECHO){
   liveData[0] = DISTANCE;  
 }
 
-void co2Controller(MQUnifiedsensor MQ135, int APIN) {  
+void co2Controller(MQUnifiedsensor MQ135, int APIN, int FANPIN) {  
   MQ135.update();
   MQ135.setA(110.47);
   MQ135.setB(-2.862);
@@ -150,56 +148,82 @@ void co2Controller(MQUnifiedsensor MQ135, int APIN) {
   if (CO2 > 8){
     errors[0] = true;
     digitalWrite(APIN, HIGH);
+    if (!FANRUNNING){
+      digitalWrite(FANPIN, LOW);
+      FANRUNNING = true;      
+    }
   }else{
     errors[0] = false;
     digitalWrite(APIN, LOW);
+    if (FANRUNNING && !errors[2]){
+      digitalWrite(FANPIN, HIGH);
+      FANRUNNING = false;
+    }
   }
   liveData[1] = CO2;
 }
 
-void temperatureController(DHT dht, int THPIN){
+void temperatureController(DHT dht, int THPIN, int DCPIN){
   float TEMPERATURE = dht.readTemperature();
   delay(500);
   if (TEMPERATURE > 30){
     errors[1] = true;
     digitalWrite(THPIN, HIGH);
+    digitalWrite(DCPIN, LOW);
   }else{
     errors[1] = false;
     digitalWrite(THPIN, LOW);
+    digitalWrite(DCPIN, HIGH);
   }
   liveData[2] = TEMPERATURE;
 }
 
-void humidityController(DHT dht, int THPIN){
+void humidityController(DHT dht, int THPIN, int FANPIN){
   float HUMIDITY = dht.readHumidity();
   delay(100);
   if (HUMIDITY > 75){
     errors[2] = true;
     digitalWrite(THPIN, HIGH);
+    if (!FANRUNNING){
+      digitalWrite(FANPIN, LOW);
+      FANRUNNING = true;
+    }
   }else{
     errors[2] = false;
     digitalWrite(THPIN, LOW);
+    if (FANRUNNING && !errors[0]){
+      digitalWrite(FANPIN, HIGH);
+      FANRUNNING = false;
+    }
   }
   liveData[3] = HUMIDITY;
 }
 
-void luminousController(int PHOTO_SIG){
+void luminousController(int PHOTO_SIG, int OUTLIGHT){
   int raw = analogRead(PHOTO_SIG);  
   float voltage = (raw/1023.0) * 5.0;
   float luxes = A*(1/pow(voltage, B));
   delay(100);
+  if (luxes < 400){
+    digitalWrite(OUTLIGHT, HIGH);
+  }else {
+    digitalWrite(OUTLIGHT, LOW);
+  }
   liveData[4] = luxes;
 }
 
 void currentController(int ACS, int CPIN){  
   int raw = analogRead(ACS);
   float voltage = (raw/1023.0) * 5.0;
-  //if (voltage < 2.5) voltage = 2.5;
   float A = ((zeroCurrentVoltage - voltage)/sensivity);
   delay(100);
-  if (A > 1.2 || A < 0.5){
+  if (A > 0.75 || A < 0){
     errors[3] = true;
-    digitalWrite(CPIN, HIGH);
+    if (A < 0) {
+      digitalWrite(CPIN, HIGH);
+    } else {
+      digitalWrite(CPIN, LOW);  
+    }   
   }else{
     errors[3] = false;
     digitalWrite(CPIN, LOW);
@@ -207,51 +231,38 @@ void currentController(int ACS, int CPIN){
   liveData[5] = A;
 }
 
-void lcdController(LiquidCrystal_I2C lcd, Keypad keypad){
-  lcd_key = keypad.getKey();
-  if (hasError()) {   
-    errorHandling(lcd);
-    return;
-  }
+bool doorController(int INFRARED, LiquidCrystal_I2C lcd, MFRC522 mfrc522, int OPEN, int CLOSE){
+  int pos = 0;  
   lcd.clear();
-  menuPrint(screen, lcd);
-  if (menu_active) {
-    switch (lcd_key) {
-      case '2':
-        screen--;
-        if (screen < 1) screen = 2;
-        menuPrint(screen, lcd);
-        break;
-      case '8':
-        screen++;
-        if (screen > 2) screen = 1;
-        menuPrint(screen, lcd);
-        break;
-      case '5':        
-        if (screen == 1) {
-          printData(true, lcd);
-        } else if (screen == 2) {
-          printData(false, lcd);
-        }
-        break;
-    }
-  } else {
-    if (lcd_key == '4') {
-      lcd.clear();
-      menu_active = true;
-      menuPrint(screen, lcd);
-      return;
-    }
-    if (screen == 1){
-      printData(true, lcd);
-      if (lcd_key == '6') {
-        saveEEPROM();
+  lcd.setCursor(0, 0);
+  if (!digitalRead(INFRARED)) {
+    lcd.print("Coloque la ");
+    lcd.setCursor(0, 1);
+    lcd.print("tarjeta");
+    while (!digitalRead(INFRARED)) {
+      if (mfrc522.PICC_IsNewCardPresent() && OPENED) {        
         lcd.clear();
-        lcd.setCursor(4,1);
-        lcd.print("Saved!");    
+        lcd.setCursor(3, 0);
+        lcd.print("Tarjeta");
+        lcd.setCursor(3, 1);
+        lcd.print("detectada!");
+        digitalWrite(OPEN, HIGH);
+      } else if (OPENED) {
+        lcd.clear();
+        lcd.setCursor(1, 0);
+        lcd.print("Por Favor");
+        lcd.setCursor(1, 1);
+        lcd.print("Entre...");
       }
     }
+    digitalWrite(OPEN, LOW);
+    delay(3000);
+    digitalWrite(CLOSE, HIGH);
+    delay(10);
+    digitalWrite(CLOSE, LOW);
+    return true;
   }
+  return false;
 }
 
 void sendSerial(){
