@@ -3,7 +3,7 @@ Apex.grid = { padding: { right: 0, left: 0 } };
 Apex.dataLabels = { enabled: false };
 
 // URL de la API (ajustar según sea necesario)
-const API_URL = "http://127.0.0.1:8000"; // Cambia esto si la API está en otro host
+const API_URL = "http://172.20.10.14:8000"; // Cambia esto si la API está en otro host
 
 // Función para obtener datos de la API
 async function fetchSensorData(endpoint) {

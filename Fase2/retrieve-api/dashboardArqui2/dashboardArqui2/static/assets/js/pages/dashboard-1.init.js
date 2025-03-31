@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", async function () {
-  const API_URL = "http://127.0.0.1:8000/all-data/"; // Asegúrate de que la API esté corriendo
+  const API_URL = "http://172.20.10.14:8000/all-data/"; // Asegúrate de que la API esté corriendo
 
   async function fetchData() {
       try {
