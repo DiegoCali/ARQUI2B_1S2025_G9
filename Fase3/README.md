@@ -33,11 +33,11 @@ graph TD;
     end
     
     %% Estilos de color
-    classDef arduino fill:#ffcc00,stroke:#000;
-    classDef raspberry fill:#ff6666,stroke:#000;
-    classDef dashboard fill:#66ccff,stroke:#000;
-    classDef nube fill:#99ff99,stroke:#000;
-    classDef aws fill:#ff9900,stroke:#000;
+    classDef arduino fill:#ffcc00,stroke:#000,color:#000,font-weight:bold,font-size:14px;
+    classDef raspberry fill:#ff6666,stroke:#000,color:#fff,font-weight:bold,font-size:14px;
+    classDef dashboard fill:#66ccff,stroke:#000,color:#000,font-weight:bold,font-size:14px;
+    classDef nube fill:#99ff99,stroke:#000,color:#000,font-weight:bold,font-size:14px;
+    classDef aws fill:#ff9900,stroke:#000,color:#000,font-weight:bold,font-size:14px;
     
     class A,W arduino;
     class B,C raspberry;
