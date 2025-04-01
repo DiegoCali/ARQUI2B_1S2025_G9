@@ -1,14 +1,51 @@
 # Instrucciones:
----
 ## División de trabajos:
----
-- Maqueta: Renovación y mejora. Encargados: Diego y Daniel.
-- API 1: Guardado de datos en la nube. Encargada: Natalia.
-- API 2: Recuperación de datos de la nube + Dashboard. Encargado: Bruce.
+- Maqueta: Afinación de detalles, autenticación y conexión MQTT. (Diego)
+- AWS Face rekognition API: Implementación e instrucciones de uso. (Daniel)
+- Dashboard local: Graficación de datos en tiempo real y envío a las BD en la nube. (Bruce)
+- Grafana: Graficación de los datos guardados en la BD y api que predice datos. (Natalia) 
 > [!IMPORTANT] 
 > Es importante que comenten su código para hacer la documentación posteriormente.
+## Arquitectura propuesta:
+```mermaid
+graph TD;
+    A[Arduino] -- Serial --> B[Raspberry Pi];
+    A --> W[Sensores/Actuadores];
+    subgraph Raspberry
+        style Raspberry fill:#ff666680,stroke:#000;
+        B -- MQTT --> C[Broker MQTT en Raspberry Pi];
+        C -- Publica/Suscribe --> B;
+        C -- MQTT --> D[API en Raspberry Pi];
+        subgraph Dashboard
+            style Dashboard fill:#66ccff80,stroke:#000;
+            D -- Autenticación --> E[Usuarios];
+            D -- Grafica datos en tiempo real --> F[Dashboard en Raspberry Pi];
+        end
+    end
+    D -- Envía comandos --> A;
+    C -- MQTT --> G[Servicio en la Nube];
+    subgraph Nube
+        style Nube fill:#99ff9980,stroke:#000;
+        AWS[Rekognition] -- Response --> E;
+        E -- post --> AWS;
+        G[Servicio en la Nube] --> H[Base de Datos en la Nube];
+        H --> I[Grafana];
+    end
+    
+    %% Estilos de color
+    classDef arduino fill:#ffcc00,stroke:#000;
+    classDef raspberry fill:#ff6666,stroke:#000;
+    classDef dashboard fill:#66ccff,stroke:#000;
+    classDef nube fill:#99ff99,stroke:#000;
+    classDef aws fill:#ff9900,stroke:#000;
+    
+    class A,W arduino;
+    class B,C raspberry;
+    class D,E,F dashboard;
+    class G,H,I nube;
+    class AWS aws;
+```
 ## ¿Cómo hacer commits?
----
 Rama de esta fase: develop-fase2.
 - Se generará una rama develop-fase2
 - De esa rama generarán otras ramas de uso propio.
