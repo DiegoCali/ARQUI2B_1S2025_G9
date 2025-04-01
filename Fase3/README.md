@@ -18,8 +18,9 @@ graph TD;
         C -- MQTT --> D[API en Raspberry Pi];
         subgraph Dashboard
             style Dashboard fill:#66ccff80,stroke:#000;
-            D -- Autenticación --> E[Usuarios];
+            D -- Publica/Subscribe --> C;
             D -- Grafica datos en tiempo real --> F[Dashboard en Raspberry Pi];
+            D -- Autenticación --> E[Usuarios];
         end
     end
     D -- Envía comandos --> A;
@@ -29,6 +30,7 @@ graph TD;
         AWS[Rekognition] -- Response --> E;
         E -- post --> AWS;
         G[Servicio en la Nube] --> H[Base de Datos en la Nube];
+        G -- Publica/Subscribe --> C;
         H --> I[Grafana];
     end
     
