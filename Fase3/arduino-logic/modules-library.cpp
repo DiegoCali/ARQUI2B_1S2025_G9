@@ -217,7 +217,7 @@ void currentController(int ACS, int CPIN){
   float voltage = (raw/1023.0) * 5.0;
   float A = ((zeroCurrentVoltage - voltage)/sensivity);
   delay(100);
-  if (A > 0.75 || A < 0){
+  if (A > 7.5 || A < 0){
     errors[3] = true;
     if (A < 0) {
       digitalWrite(CPIN, HIGH);
@@ -250,9 +250,9 @@ bool doorController(int INFRARED, LiquidCrystal_I2C lcd, MFRC522 mfrc522, int OP
       }
     }
     digitalWrite(OPEN, LOW);
-    delay(3000);
+    delay(2000);
     digitalWrite(CLOSE, HIGH);
-    delay(10);
+    delay(3000);
     digitalWrite(CLOSE, LOW);
     return true;
   }

@@ -48,7 +48,7 @@ int AIRPIN = 9;
 int THPIN = 7;
 
 int OPENSERVO = 26;
-int CLOSESERVO = 28;
+int CLOSESERVO = 30;
 
 bool INSERTCARD = false;
 
