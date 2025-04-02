@@ -7,7 +7,7 @@ La base de datos será una tabla con los datos de nuestro arduino, simplemente c
 ## Grafana
 Grafana se conectará con la base de datos para mostrar visualizaciones de cada sensor además de un mapa de calor.
 
-## Predicción en Python:
+## Predicción en Python (local o en la nube):
 Esto también debe conectarse a la base de datos para hacer regresiones lineales y predecir el comportamiento futuro de los sensores, se requiere un mínimode 1 día y un máximo de 8 días de predicción, se recomienda en python por la gran cantidad de librerías que tiene este para el manejo de datos.
 
 > [!IMPORTANT]
