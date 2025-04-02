@@ -52,6 +52,9 @@ int CLOSESERVO = 30;
 
 bool INSERTCARD = false;
 
+// Plataform instructions
+bool LOCKED = false;
+
 void setup() {
   Serial.begin(9600);
 
@@ -99,13 +102,29 @@ void setup() {
 }
 
 void loop() {    
-  ultrasonicController(INLIGHT, TRIG, ECHO);
+  if (Serial.available()) {  // Verificar si hay datos en el buffer serial
+    char command = Serial.read();  // Leer un byte del puerto serial 
+    if (command == '1') {  // Si el comando recibido es '1'
+      LOCKED = true;
+      digitalWrite(INLIGHT, HIGH);
+      digitalWrite(OUTLIGHT, HIGH);
+    }
+    if (command == '0') {
+      LOCKED = false;
+      digitalWrite(INLIGHT, LOW);
+      digitalWrite(OUTLIGHT, LOW);
+    }
+    if (command == 'facetrue'){
+      // .. face rekognition
+    }
+  }
+  ultrasonicController(INLIGHT, TRIG, ECHO, LOCKED);
   co2Controller(MQ135, AIRPIN, FANPIN);
   temperatureController(dht, HEATPIN, DCPIN);
   humidityController(dht, THPIN, FANPIN);
-  luminousController(LSIG, OUTLIGHT);
+  luminousController(LSIG, OUTLIGHT, LOCKED);
   currentController(ACS, BUZZPIN);
-  INSERTCARD =doorController(INFRARED, lcd, mfrc522, OPENSERVO, CLOSESERVO);
+  INSERTCARD = doorController(INFRARED, lcd, mfrc522, OPENSERVO, CLOSESERVO);
   if (!INSERTCARD) {
     printData(true, lcd);
   }

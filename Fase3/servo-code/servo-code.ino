@@ -7,9 +7,6 @@ int CLOSEPIN = 12;
 
 void setup() {
   servo.attach(9);
-  servo.write(180);
-  delay(1000);
-  servo.write(90);
   pinMode(OPENPIN, INPUT);
   pinMode(CLOSEPIN, INPUT);
 }

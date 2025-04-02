@@ -3,8 +3,8 @@
 float DISTANCE = 0;
 float ECHO_TIME = 0;
 
-const float sensivity = 0.100; // For the 20A
-const float zeroCurrentVoltage = 2.5;
+//const float sensivity = 0.100; // For the 20A
+//const float zeroCurrentVoltage = 2.5;
 
 const float A = 675.0;
 const float B = 0.75;
@@ -116,7 +116,7 @@ void printData(bool live, LiquidCrystal_I2C lcd){
 }
 
 //*****Exported Functions*****
-void ultrasonicController(int LED, int TRIG, int ECHO){
+void ultrasonicController(int LED, int TRIG, int ECHO, bool LOCKED){
   // *** activacion del trig - envio y recepcion
   digitalWrite(TRIG, HIGH);
   delayMicroseconds(1);
@@ -130,6 +130,11 @@ void ultrasonicController(int LED, int TRIG, int ECHO){
   DISTANCE = ECHO_TIME/58.2;
   if (DISTANCE > 99 ) DISTANCE = 99.99; 
   
+  if (LOCKED) {
+    liveData[0] = DISTANCE;
+    return;
+  }
+
   if (DISTANCE < 15){
     digitalWrite(LED, HIGH);               
   }
@@ -181,7 +186,7 @@ void temperatureController(DHT dht, int THPIN, int DCPIN){
 void humidityController(DHT dht, int THPIN, int FANPIN){
   float HUMIDITY = dht.readHumidity();
   delay(100);
-  if (HUMIDITY > 75){
+  if (HUMIDITY > 80){
     errors[2] = true;
     digitalWrite(THPIN, HIGH);
     if (!FANRUNNING){
@@ -199,12 +204,16 @@ void humidityController(DHT dht, int THPIN, int FANPIN){
   liveData[3] = HUMIDITY;
 }
 
-void luminousController(int PHOTO_SIG, int OUTLIGHT){
+void luminousController(int PHOTO_SIG, int OUTLIGHT, bool LOCKED){
   int raw = analogRead(PHOTO_SIG);  
   float voltage = (raw/1023.0) * 5.0;
   float luxes = A*(1/pow(voltage, B));
   delay(100);
-  if (luxes < 400){
+  if (LOCKED) {
+    liveData[4] = luxes;
+    return;
+  }
+  if (luxes < 300){
     digitalWrite(OUTLIGHT, HIGH);
   }else {
     digitalWrite(OUTLIGHT, LOW);
@@ -214,12 +223,13 @@ void luminousController(int PHOTO_SIG, int OUTLIGHT){
 
 void currentController(int ACS, int CPIN){  
   int raw = analogRead(ACS);
-  float voltage = (raw/1023.0) * 5.0;
-  float A = ((zeroCurrentVoltage - voltage)/sensivity);
+  float voltage = (raw/1023.0) * 5.0; // Voltage
+  float resistance = 1000 - (raw/1023.0) * 1000; // Ohms
+  float A = voltage/resistance * 1000; // A
   delay(100);
-  if (A > 7.5 || A < 0){
+  if (A > 1.5 || A < 0.1){
     errors[3] = true;
-    if (A < 0) {
+    if (A < 0.1) {
       digitalWrite(CPIN, HIGH);
     } else {
       digitalWrite(CPIN, LOW);  
@@ -253,6 +263,9 @@ bool doorController(int INFRARED, LiquidCrystal_I2C lcd, MFRC522 mfrc522, int OP
     delay(2000);
     digitalWrite(CLOSE, HIGH);
     delay(3000);
+    lcd.clear();
+    lcd.setCursor(2,0);
+    lcd.print("Bienvenido!");
     digitalWrite(CLOSE, LOW);
     return true;
   }
