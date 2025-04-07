@@ -16,7 +16,7 @@ Aquí se publicarán los datos recopilados del arduino con este formato:
 }
 ```
 ## commands
-Aquí se publicarán los comandos que recibiráel arduino como:
+Aquí se publicarán los comandos que recibirá el arduino como:
 - `1`: encender luz
 - `0`: apagar luz
 - `facetrue`: abrir la puerta
