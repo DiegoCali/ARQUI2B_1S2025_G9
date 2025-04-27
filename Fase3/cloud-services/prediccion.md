@@ -1,10 +1,13 @@
-1. Pandas
+1. Instalar
 
 ```
 pip install pandas prophet
+pip install pymysql
+
 ```
 
-2. Prophet lib
+
+1. Prophet lib
 
 Prophet es una libreria creada por Facebook para predecir series de tiempo, datos como temperatura, ventas, entre otros. 
 Usa internamente modelos estadísticos de regresión y estacionalidad para encontrar patrones y predecir futuros valores.

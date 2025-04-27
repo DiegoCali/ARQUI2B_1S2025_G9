@@ -1,75 +1,127 @@
-
 import pandas as pd
 from prophet import Prophet
+import pymysql
 import json
+from datetime import datetime, timedelta, timezone
 
 # LA CLASE QUE VA A REALIZAR LA PREDICCION DE LOS SENSORES
 class SensorPredictor:
-    # -----------------Revision de dios: 1-8-----------------------------------------------
     def __init__(self, dias: int):
         if dias < 1 or dias > 8:
-            raise ValueError("(Error) El número de dias debe ser 1-8.")
-    # ------------------------------------------------------------------------
+            print("(ERROR) El numero de dias debe ser 1- 8 ")
         self.dias = dias
-        # aca es donde se cargan los data en formato: DATA FRAME
-        self.data = self.db_data()  
-        # aca se establecen las variables que se van a predecir
+        #LLAMA A a la db para CARGAR LOS DATOS
+        self.data = self.db_sensor_conn()
+        # VALORES QUE SE VAN A PREDECIR
+        # distance, co2, temperature, humidity, light, current
         self.dataVariable = ['distance', 'co2', 'temperature', 'humidity', 'light', 'current']
 
-# -----------------------------------DATA: Aca de debe agregar despues la info de la db-----------------------------------
-    def db_data(self):
-        data = [
-            {"distance": 10, "co2": 400, "temperature": 22, "humidity": 55, "light": 200, "current": 0.5, "date-time": "2025-04-01T00:00:00Z"},
-            {"distance": 11, "co2": 405, "temperature": 23, "humidity": 56, "light": 210, "current": 0.6, "date-time": "2025-04-02T00:00:00Z"},
-            {"distance": 10, "co2": 398, "temperature": 21, "humidity": 54, "light": 190, "current": 0.4, "date-time": "2025-04-03T00:00:00Z"},
-            {"distance": 12, "co2": 410, "temperature": 24, "humidity": 57, "light": 220, "current": 0.7, "date-time": "2025-04-04T00:00:00Z"},
-            {"distance": 10, "co2": 400, "temperature": 22.5, "humidity": 55.5, "light": 205, "current": 0.5, "date-time": "2025-04-05T00:00:00Z"},
-            {"distance": 10, "co2": 402, "temperature": 22.2, "humidity": 55.2, "light": 203, "current": 0.52, "date-time": "2025-04-06T00:00:00Z"},
-            {"distance": 11, "co2": 407, "temperature": 23.5, "humidity": 56.5, "light": 215, "current": 0.6, "date-time": "2025-04-07T00:00:00Z"},
-            {"distance": 11, "co2": 406, "temperature": 23.0, "humidity": 56.0, "light": 212, "current": 0.58, "date-time": "2025-04-08T00:00:00Z"}
-        ]
-        # La data se debe convertir en una DATAFRAME
-        return pd.DataFrame(data)  
-# --------------------------------------------------------------------------------------
+# ------------------------------------------------------------------------
 
-# ----------------------------------------MAIN FUNCTION: esta entrena al prophet en base a una variable (por eso luego se hacer un loop de ella con cada variable) -----------------------------------------------
+# --------------------------------- db connection -----------------------
+    def db_sensor_conn(self):
+        # dato de la db, nombre: data_sensor
+        db_config = {
+            "host": "arqui2db.cctkkcomupit.us-east-1.rds.amazonaws.com",
+            "user": "admin",
+            "password": "Arqui2DBProject*",
+            "database": "arqui2db",
+            "port": 3306
+        }
+
+        # ------------- CONEXION A LA DB
+        connection = pymysql.connect(
+            host=db_config["host"],
+            user=db_config["user"],
+            password=db_config["password"],
+            database=db_config["database"],
+            port=db_config["port"]
+        )
+
+#trycatch QUERY
+        try:
+#CUERSOS PARA REALIZAR LA QUERY, recibe datos como diccionario
+            query_cursor = connection.cursor(pymysql.cursors.DictCursor)
+            
+    # ----------- datos de los ultimos 10 dias
+            # CACLUKAR LA FECHA
+            fecha_limite = (datetime.utcnow() - timedelta(days=10)).strftime('%Y-%m-%d %H:%M:%S')
+
+            # SELECT, DATA --- MAX: 50
+            query50 = f"""
+                SELECT distance, co2, temperature, humidity, light, current, `date_time`
+                FROM sensor_data
+                WHERE `date_time` >= '{fecha_limite}'
+                ORDER BY `date_time` DESC
+                LIMIT 50;
+            """
+            # run query
+            query_cursor.execute(query50)
+            # obtiene todos los resultados
+            results = query_cursor.fetchall()
+
+            if not results:
+                print("(ERROR) No existen datos en la db para los ultimos 10 dias)")
+
+# ------------ DATA FRAME (para prophet)
+            # El resultado de la query se vuelva la datafra,e
+            df = pd.DataFrame(results)
+
+            # calculo de fechas, 10 dias mas de cuando se esta haciendo la query
+            if not df.empty:
+                max_date = pd.to_datetime(df['date_time']).max().replace(tzinfo=timezone.utc)
+                today = datetime.now(timezone.utc)
+                delta = today - max_date
+
+                # ajustar las fechas, max date siempre sera el dia 
+                df['date_time'] = pd.to_datetime(df['date_time']) + delta - timedelta(days=1)
+
+            # regresa el data frame con las fechas correctas
+            return df
+
+        finally:
+            connection.close()
+# -------------------------------------------------------------------
+
+# ----------------------------PREDICCION VARIABLE POR VARIABLE ---------------------------
     def predictionSingleVariable(self, dataVariable):
-        # tabla con fecha y valor --- dataVariable= nombre de la variable a predecir
-        df = self.data[['date-time', dataVariable]].copy()
-        df.columns = ['ds', 'y']  # Prophet necesita estos nombres exactos
-
-        # ---------------- se elimina la zona horaria que viene con la timestamp
+        df = self.data[['date_time', dataVariable]].copy()
+        # data frame de dos columnas, ds fecha y y valor
+        df.columns = ['ds', 'y']
         df['ds'] = pd.to_datetime(df['ds']).dt.tz_localize(None)
 
-        # ------------------------ se crea el modelo y se entrena (fit)
+        #se cre el modelo y se entrena
         modelo = Prophet()
         modelo.fit(df)
 
-        # ------------------------ Aca es donde se crean las predicciones segun las fechas al fututo 1-8
-        diasPrediction = modelo.make_future_dataframe(periods=self.dias)
+        # data frame con los 10 dias proximos
+        start_date = datetime.now(timezone.utc).replace(tzinfo=None)
+        diasPrediction = pd.DataFrame({
+            'ds': pd.date_range(start=start_date, periods=self.dias, freq='D')
+        })
 
-        # ------------------------ Se hace la prediccion de los valores para esa variable
+        # PREDICCION SE HACE
         prediccion = modelo.predict(diasPrediction).tail(self.dias)
 
-        # ------------------------ resultado
+        # ajustar valores y fechas --- formato para el json
         valores = list(prediccion['yhat'].round(2))
         fechas = list(prediccion['ds'].dt.strftime('%Y-%m-%dT%H:%M:%SZ'))
         return valores, fechas
-
-# --------------------------------------------------------------------------------------
-# -------------------Crea el arreglo para enviar y predice cada uno de los data--------------------------------------------
+    
+# -------------------------------------------------------------------
     def predictionGenerator(self):
         predicciones = {}
         fechas = None
 
-        # ---------------------  loop por cada variable y se predice
+# Predice el valor de cada variable y lo guarda
         for dataVariable in self.dataVariable:
             valores, diasPrediction = self.predictionSingleVariable(dataVariable)
             predicciones[dataVariable] = valores
+            # solo guarda la fecha una vez
             if fechas is None:
                 fechas = diasPrediction
 
-        # --------------------- Luego de tener las predicciones para los dias enviados estas se unen en un solo json
+    # FORMATO DEL RESULTADO: JSON Y ORDEN
         mergedResultado = []
         for i in range(self.dias):
             mergedResultado.append({
@@ -79,17 +131,16 @@ class SensorPredictor:
                 "humidity": predicciones["humidity"][i],
                 "light": predicciones["light"][i],
                 "current": predicciones["current"][i],
-                "date-time": fechas[i]
+                "date_time": fechas[i]
             })
 
         return mergedResultado
-# --------------------------------------------------------------------------------------
 
-# ---------- se ejecuta 
+# ---------------- - MAIN -------------------
 if __name__ == "__main__":
-    dias = 3  # los dias a predecir 1-8
+    dias = 7  # LOS DIAS QUE SE VAN A PREDECIR
     prophetPrediction = SensorPredictor(dias)
+    #prediccion: {distance, co2, temperature, humidity, light, current}
     finalPrediction = prophetPrediction.predictionGenerator()
-
-    # ------------- Solo se imprime el resultado por el momento
+    # print(finalPrediction)
     print(json.dumps(finalPrediction, indent=4))
