@@ -1,10 +1,13 @@
+# mqtt_predictor.py
+import json
+import threading
 import pandas as pd
 from prophet import Prophet
 import pymysql
-import json
 from datetime import datetime, timedelta, timezone
+import paho.mqtt.client as mqtt
 
-# LA CLASE QUE VA A REALIZAR LA PREDICCION DE LOS SENSORES
+# ------------------- PREDICCION
 class SensorPredictor:
     def __init__(self, dias: int):
         if dias < 1 or dias > 8:
@@ -136,11 +139,63 @@ class SensorPredictor:
 
         return mergedResultado
 
-# ---------------- - MAIN -------------------
-if __name__ == "__main__":
-    dias = 7  # LOS DIAS QUE SE VAN A PREDECIR
-    prophetPrediction = SensorPredictor(dias)
-    #prediccion: {distance, co2, temperature, humidity, light, current}
-    finalPrediction = prophetPrediction.predictionGenerator()
-    # print(finalPrediction)
-    print(json.dumps(finalPrediction, indent=4))
+
+# ------------------------------------ MQTT CONN
+class MQTTPredictorHandler:
+    def __init__(self, broker, port):
+        self.client = mqtt.Client()
+        self.broker = broker
+        self.port = port
+        self.root_topic = "arqui2_p2_g9"
+
+        self.client.on_connect = self.on_connect
+        self.client.on_message = self.on_message
+# CONN -------------------------------------------
+
+    def on_connect(self, client, userdata, flags, rc):
+        if rc == 0:
+            print("CONECTADO AL BROKER")
+            self.client.subscribe(f"{self.root_topic}/prediction_request") 
+            print("Suscrito: prediction_request")
+        else:
+            print(f"(ERROR) NO SE PUDO CONECTAR {rc}")
+
+# PREDICTION_REQUEST, RECIBE LOS DIAS A PREDECIR
+    def on_message(self, client, userdata, msg):
+        try:
+            payload = msg.payload.decode()
+            payload_json = json.loads(payload)
+
+            if "dias" not in payload_json:
+                raise ValueError("JSON de request mal estructurado")
+
+            dias = int(payload_json["dias"])
+            print(f"Dias a predecir:  {dias}")
+
+            predictor = SensorPredictor(dias)
+            prediction = predictor.predictionGenerator()
+
+            result_json = json.dumps(prediction)
+            self.publish_prediction(result_json)
+
+        except Exception as e:
+            print(f"(ERROR) ERROR CON EL MENSAJE DIAS: {e}")
+
+#PREDICION_RESPONSE, ENVIA LA PREDICCION
+    def publish_prediction(self, prediction_json):
+        result = self.client.publish(f"{self.root_topic}/prediction_response", prediction_json)
+        status = result[0]
+        if status == 0:
+            print("PREDICCION ENVIADA", prediction_json )
+        else:
+            print("(ERROR) NO SE PUDO MANDAR LA PREDICCION")
+# ---------------- LOOP
+    def loop_start(self):
+        self.client.connect(self.broker, self.port, 60)
+        self.client.loop_start()
+        print("---------------- INICIO API MQTT--------------------")
+
+    def loop_stop(self):
+        self.client.loop_stop()
+        self.client.disconnect()
+        print("----------------- FIN API MQTT ---------------------")
