@@ -115,7 +115,13 @@ void loop() {
       digitalWrite(OUTLIGHT, LOW);
     }
     if (command == 'facetrue'){
-      // .. face rekognition
+      digitalWrite(OPENSERVO, HIGH);
+      delay(10);      
+      digitalWrite(OPENSERVO, LOW);
+      delay(1980);
+      digitalWrite(CLOSESERVO, HIGH);
+      delay(10);
+      digitalWrite(CLOSESERVO, LOW);
     }
   }
   ultrasonicController(INLIGHT, TRIG, ECHO, LOCKED);
