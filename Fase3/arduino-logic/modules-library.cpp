@@ -257,6 +257,7 @@ bool doorController(int INFRARED, LiquidCrystal_I2C lcd, MFRC522 mfrc522, int OP
         lcd.setCursor(3, 1);
         lcd.print("detectada!");
         digitalWrite(OPEN, HIGH);
+        Serial.println("entered");
       }
     }
     digitalWrite(OPEN, LOW);

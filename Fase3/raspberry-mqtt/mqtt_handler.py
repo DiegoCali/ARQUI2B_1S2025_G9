@@ -25,7 +25,17 @@ class MQTTHandler:
         self.serial_handler.write_line(command)
 
     def publish(self, data):
+        # Check if the data is { "entered": true }
+        result = None
         # First send all data to arduino_data topic
+        if "entered" in data and data["entered"] == True:
+            result = self.client.publish(f"{self.root_topic}/persons", json.dumps(data))
+            status = result[0]
+            if status == 0:
+                print(f"Sent `{data}` to topic `persons`")
+            else:
+                print(f"Failed to send message to topic persons")
+            return
         result = self.client.publish(f"{self.root_topic}/arduino_data", json.dumps(data))
         status = result[0]
         if status == 0:
