@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr" data-navigation-type="default" data-navbar-horizontal-shape="default">
+
+  
+<!-- Mirrored from prium.github.io/phoenix/v1.22.0/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 19 Apr 2025 04:08:08 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=utf-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- ===============================================-->
+    <!--    Document Title-->
+    <!-- ===============================================-->
+    <title>Dashboard Arqui2</title>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicons/favicon.ico">
+    <link rel="manifest" href="assets/img/favicons/manifest.json">
+    <meta name="msapplication-TileImage" content="assets/img/favicons/mstile-150x150.png">
+    <meta name="theme-color" content="#ffffff">
+    <script src="vendors/simplebar/simplebar.min.js"></script>
+    <script src="assets/js/config.js"></script>
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    <link rel="preconnect" href="../../../fonts.googleapis.com/index.html">
+    <link rel="preconnect" href="../../../fonts.gstatic.com/index.html" crossorigin="">
+    <link href="../../../fonts.googleapis.com/css275fb.css?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="vendors/simplebar/simplebar.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../unicons.iconscout.com/release/v4.0.8/css/line.css">
+    <link href="assets/css/theme-rtl.min.css" type="text/css" rel="stylesheet" id="style-rtl">
+    <link href="assets/css/theme.min.css" type="text/css" rel="stylesheet" id="style-default">
+    <link href="assets/css/user-rtl.min.css" type="text/css" rel="stylesheet" id="user-style-rtl">
+    <link href="assets/css/user.min.css" type="text/css" rel="stylesheet" id="user-style-default">
+    <script>
+      var phoenixIsRTL = window.config.config.phoenixIsRTL;
+      if (phoenixIsRTL) {
+        var linkDefault = document.getElementById('style-default');
+        var userLinkDefault = document.getElementById('user-style-default');
+        linkDefault.setAttribute('disabled', true);
+        userLinkDefault.setAttribute('disabled', true);
+        document.querySelector('html').setAttribute('dir', 'rtl');
+      } else {
+        var linkRTL = document.getElementById('style-rtl');
+        var userLinkRTL = document.getElementById('user-style-rtl');
+        linkRTL.setAttribute('disabled', true);
+        userLinkRTL.setAttribute('disabled', true);
+      }
+    </script>
+    <link href="vendors/leaflet/leaflet.css" rel="stylesheet">
+    <link href="vendors/leaflet.markercluster/MarkerCluster.css" rel="stylesheet">
+    <link href="vendors/leaflet.markercluster/MarkerCluster.Default.css" rel="stylesheet">
+  </head>
+
+  <body>
+    <!-- ===============================================-->
+    <!--    Main Content-->
+    <!-- ===============================================-->
+    <main class="main" id="top">
+      <nav class="navbar navbar-vertical navbar-expand-lg" style="display:none;">
+        <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+          <!-- scrollbar removed-->
+          <div class="navbar-vertical-content">
+            <ul class="navbar-nav flex-column" id="navbarVerticalNav">
+              <li class="nav-item">
+                <!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="#nv-home" role="button" data-bs-toggle="collapse" aria-expanded="true" aria-controls="nv-home">
+                    <div class="d-flex align-items-center">
+                      <div class="dropdown-indicator-icon-wrapper"><span class="fas fa-caret-right dropdown-indicator-icon"></span></div><span class="nav-link-icon"><span data-feather="pie-chart"></span></span><span class="nav-link-text">Home</span>
+                    </div>
+                  </a>
+                  <div class="parent-wrapper label-1">
+                    <ul class="nav collapse parent show" data-bs-parent="#navbarVerticalCollapse" id="nv-home">
+                      <li class="collapsed-nav-item-title d-none">Inicio</li>
+                      <li class="nav-item"><a class="nav-link active" href="index.html">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">Resumen</span></div>
+                        </a><!-- more inner pages-->
+                      </li>
+                      <li class="nav-item"><a class="nav-link" href="dashboard/crm.html">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">Predicciones</span></div>
+                        </a><!-- more inner pages-->
+                      </li>
+                      <li class="nav-item"><a class="nav-link" href="dashboard/stock.html">
+                          <div class="d-flex align-items-center"><span class="nav-link-text">Historico</span><span class="badge ms-2 badge badge-phoenix badge-phoenix-warning ">nuevo</span></div>
+                        </a><!-- more inner pages-->
+                      </li>
+                      
+                    </ul>
+                  </div>
+                </div>
+              </li>
+
+
+              <li class="nav-item">
+                <!-- label-->
+                <p class="navbar-vertical-label">Documentacion</p>
+                <hr class="navbar-vertical-line" /><!-- parent pages-->
+                
+  
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="documentation/design-file.html" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="figma"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Diseño</span></span></div>
+                  </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="https://github.com/DiegoCali/ARQUI2B_1S2025_G9" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="github"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Github</span></span></div>
+                  </a></div><!-- parent pages-->
+                <div class="nav-item-wrapper"><a class="nav-link label-1" href="showcase.html" role="button" data-bs-toggle="" aria-expanded="false">
+                    <div class="d-flex align-items-center"><span class="nav-link-icon"><span data-feather="help-circle"></span></span><span class="nav-link-text-wrapper"><span class="nav-link-text">Ayuda</span></span></div>
+                  </a></div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="navbar-vertical-footer"><button class="btn navbar-vertical-toggle border-0 fw-semibold w-100 white-space-nowrap d-flex align-items-center"><span class="uil uil-left-arrow-to-left fs-8"></span><span class="uil uil-arrow-from-right fs-8"></span><span class="navbar-vertical-footer-text ms-2">Cerrar Menu</span></button></div>
+      </nav>
+      <nav class="navbar navbar-top fixed-top navbar-expand" id="navbarDefault" style="display:none;">
+        <div class="collapse navbar-collapse justify-content-between">
+          <div class="navbar-logo">
+            <button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+            <a class="navbar-brand me-1 me-sm-3" href="index.html">
+              <div class="d-flex align-items-center">
+                <div class="d-flex align-items-center"><img src="assets/img/icons/logo.png" alt="phoenix" width="27" />
+                  <h5 class="logo-text ms-2 d-none d-sm-block">ARQUI2</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+          <div class="search-box navbar-top-search-box d-none d-lg-block" data-list='{"valueNames":["title"]}' style="width:25rem;">
+            <form class="position-relative" data-bs-toggle="search" data-bs-display="static"><input class="form-control search-input fuzzy-search rounded-pill form-control-sm" type="search" placeholder="Search..." aria-label="Search" />
+              <span class="fas fa-search search-box-icon"></span>
+            </form>
+            <div class="btn-close position-absolute end-0 top-50 translate-middle cursor-pointer shadow-none" data-bs-dismiss="search"><button class="btn btn-link p-0" aria-label="Close"></button></div>
+            <div class="dropdown-menu border start-0 py-0 overflow-hidden w-100">
+              <div class="scrollbar-overlay" style="max-height: 30rem;">
+                <div class="list pb-3">
+                  <h6 class="dropdown-header text-body-highlight fs-10 py-2">2 <span class="text-body-quaternary">resultados</span></h6>
+                  <hr class="my-0" />
+                  <h6 class="dropdown-header text-body-highlight fs-9 border-bottom border-translucent py-2 lh-sm">Busquedas recientes</h6>
+                  <div class="py-2"><a class="dropdown-item" href="dashboard/crm.html">
+                      <div class="d-flex align-items-center">
+                        <div class="fw-normal text-body-highlight title"><span class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span> Prediccion de datos</div>
+                      </div>
+                    </a>
+                    <a class="dropdown-item" href="dashboard/stock.html">
+                      <div class="d-flex align-items-center">
+                        <div class="fw-normal text-body-highlight title"> <span class="fa-solid fa-clock-rotate-left" data-fa-transform="shrink-2"></span> Datos historicos</div>
+                      </div>
+                    </a>
+                  </div>
+
+                </div>
+                <div class="text-center">
+                  <p class="fallback fw-bold fs-7 d-none">No se encontraron resultados.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <ul class="navbar-nav navbar-nav-icons flex-row">
+            <li class="nav-item">
+              <div class="theme-control-toggle fa-icon-wait px-2"><input class="form-check-input ms-0 theme-control-toggle-input" type="checkbox" data-theme-control="phoenixTheme" value="dark" id="themeControlToggle" /><label class="mb-0 theme-control-toggle-label theme-control-toggle-light" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;"><span class="icon" data-feather="moon"></span></label><label class="mb-0 theme-control-toggle-label theme-control-toggle-dark" for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left" data-bs-title="Switch theme" style="height:32px;width:32px;"><span class="icon" data-feather="sun"></span></label></div>
+            </li>
+            <li class="nav-item d-lg-none"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#searchBoxModal"><span data-feather="search" style="height:19px;width:19px;margin-bottom: 2px;"></span></a></li>
+            
+            <li class="nav-item dropdown">
+              <a class="nav-link" id="navbarDropdownNindeDots" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" data-bs-auto-close="outside" aria-expanded="false"><svg width="16" height="16" viewbox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="2" cy="2" r="2" fill="currentColor"></circle>
+                  <circle cx="2" cy="8" r="2" fill="currentColor"></circle>
+                  <circle cx="2" cy="14" r="2" fill="currentColor"></circle>
+                  <circle cx="8" cy="8" r="2" fill="currentColor"></circle>
+                  <circle cx="8" cy="14" r="2" fill="currentColor"></circle>
+                  <circle cx="14" cy="8" r="2" fill="currentColor"></circle>
+                  <circle cx="14" cy="14" r="2" fill="currentColor"></circle>
+                  <circle cx="8" cy="2" r="2" fill="currentColor"></circle>
+                  <circle cx="14" cy="2" r="2" fill="currentColor"></circle>
+                </svg></a>
+              <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-nine-dots shadow border" aria-labelledby="navbarDropdownNindeDots">
+                <div class="card bg-body-emphasis position-relative border-0">
+                  <div class="card-body pt-3 px-3 pb-0 overflow-auto scrollbar" style="height: 20rem;">
+                    <div class="row text-center align-items-center gx-0 gy-0">
+                      
+                      <div class="col-4"><a class="d-block bg-body-secondary-hover p-2 rounded-3 text-center text-decoration-none mb-3" href="#!"><img src="assets/img/nav-icons/google-cloud.webp" alt="" width="30" />
+                          <p class="mb-0 text-body-emphasis text-truncate fs-10 mt-1 pt-1">Cloud</p>
+                        </a></div>
+                      <div class="col-4"><a class="d-block bg-body-secondary-hover p-2 rounded-3 text-center text-decoration-none mb-3" href="https://github.com/DiegoCali/ARQUI2B_1S2025_G9"><img src="assets/img/nav-icons/gitlab.webp" alt="" width="30" />
+                          <p class="mb-0 text-body-emphasis text-truncate fs-10 mt-1 pt-1">Gitlab</p>
+                        </a></div>
+                      <div class="col-4"><a class="d-block bg-body-secondary-hover p-2 rounded-3 text-center text-decoration-none mb-3" href="#!"><img src="assets/img/nav-icons/google-drive.webp" alt="" width="30" />
+                          <p class="mb-0 text-body-emphasis text-truncate fs-10 mt-1 pt-1">Drive</p>
+                        </a></div>
+                      
+                      <div class="col-4"><a class="d-block bg-body-secondary-hover p-2 rounded-3 text-center text-decoration-none mb-3" href="#!"><img src="assets/img/nav-icons/spotify.webp" alt="" width="30" />
+                          <p class="mb-0 text-body-emphasis text-truncate fs-10 mt-1 pt-1">Spotify</p>
+                        </a></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <li class="nav-item dropdown"><a class="nav-link lh-1 pe-0" id="navbarDropdownUser" href="#!" role="button" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-haspopup="true" aria-expanded="false">
+                <div class="avatar avatar-l ">
+                  <img class="rounded-circle " src="assets/img/team/eren.webp" alt="" />
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end navbar-dropdown-caret py-0 dropdown-profile shadow border" aria-labelledby="navbarDropdownUser">
+                <div class="card position-relative border-0">
+                  <div class="card-body p-0">
+                    <div class="text-center pt-4 pb-3">
+                      <div class="avatar avatar-xl ">
+                        <img class="rounded-circle " src="assets/img/team/eren.webp" alt="" />
+                      </div>
+                      <h6 class="mt-2 text-body-emphasis">Bruce Castillo</h6>
+                    </div>
+                    
+                  </div>
+                  <div class="overflow-auto scrollbar" style="height: 10rem;">
+                    <ul class="nav d-flex flex-column mb-2 pb-1">
+                      <li class="nav-item"><a class="nav-link px-3 d-block" href="https://github.com/Carbonell-Castillo" blank> <span class="me-2 text-body align-bottom" data-feather="user"></span><span>Perfil</span></a></li>
+                      <li class="nav-item"><a class="nav-link px-3 d-block" href="index.html"><span class="me-2 text-body align-bottom" data-feather="pie-chart"></span>Dashboard</a></li>
+                      <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span class="me-2 text-body align-bottom" data-feather="help-circle"></span>Help Center</a></li>
+                      <li class="nav-item"><a class="nav-link px-3 d-block" href="#!"> <span class="me-2 text-body align-bottom" data-feather="globe"></span>Idioma</a></li>
+                    </ul>
+                  </div>
+                  <div class="card-footer p-0 border-top border-translucent">
+                  
+                    <div class="my-2 text-center fw-bold fs-10 text-body-quaternary"><a class="text-body-quaternary me-1" href="devscapital.com">Privacy policy</a>&bull;<a class="text-body-quaternary mx-1" href="devscapital.com">devscapital.com</a></div>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <nav class="navbar navbar-top navbar-slim fixed-top navbar-expand" id="topNavSlim" style="display:none;">
+        <div class="collapse navbar-collapse justify-content-between">
+          <div class="navbar-logo">
+            <button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse" aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+            <a class="navbar-brand navbar-brand" href="index.html">Arqui2 <span class="text-body-highlight d-none d-sm-inline">slim</span></a>
+          </div>
+   
+        </div>
+      </nav>
+      <nav class="navbar navbar-top fixed-top navbar-expand-lg" id="navbarTop" style="display:none;">
+        <div class="navbar-logo">
+          <button class="btn navbar-toggler navbar-toggler-humburger-icon hover-bg-transparent" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTopCollapse" aria-controls="navbarTopCollapse" aria-expanded="false" aria-label="Toggle Navigation"><span class="navbar-toggle-icon"><span class="toggle-line"></span></span></button>
+          <a class="navbar-brand me-1 me-sm-3" href="index.html">
+            <div class="d-flex align-items-center">
+              <div class="d-flex align-items-center"><img src="assets/img/icons/logo.png" alt="phoenix" width="27" />
+                <h5 class="logo-text ms-2 d-none d-sm-block">Arqui2</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        
+      </nav>
+
+
+    
+      <script>
+        var navbarTopShape = window.config.config.phoenixNavbarTopShape;
+        var navbarPosition = window.config.config.phoenixNavbarPosition;
+        var body = document.querySelector('body');
+        var navbarDefault = document.querySelector('#navbarDefault');
+        var navbarTop = document.querySelector('#navbarTop');
+        var topNavSlim = document.querySelector('#topNavSlim');
+        var navbarTopSlim = document.querySelector('#navbarTopSlim');
+        var navbarCombo = document.querySelector('#navbarCombo');
+        var navbarComboSlim = document.querySelector('#navbarComboSlim');
+        var dualNav = document.querySelector('#dualNav');
+
+        var documentElement = document.documentElement;
+        var navbarVertical = document.querySelector('.navbar-vertical');
+
+        if (navbarPosition === 'dual-nav') {
+          topNavSlim?.remove();
+          navbarTop?.remove();
+          navbarTopSlim?.remove();
+          navbarCombo?.remove();
+          navbarComboSlim?.remove();
+          navbarDefault?.remove();
+          navbarVertical?.remove();
+          dualNav.removeAttribute('style');
+          document.documentElement.setAttribute('data-navigation-type', 'dual');
+
+        } else if (navbarTopShape === 'slim' && navbarPosition === 'vertical') {
+          navbarDefault?.remove();
+          navbarTop?.remove();
+          navbarTopSlim?.remove();
+          navbarCombo?.remove();
+          navbarComboSlim?.remove();
+          topNavSlim.style.display = 'block';
+          navbarVertical.style.display = 'inline-block';
+          document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+
+        } else if (navbarTopShape === 'slim' && navbarPosition === 'horizontal') {
+          navbarDefault?.remove();
+          navbarVertical?.remove();
+          navbarTop?.remove();
+          topNavSlim?.remove();
+          navbarCombo?.remove();
+          navbarComboSlim?.remove();
+          dualNav?.remove();
+          navbarTopSlim.removeAttribute('style');
+          document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+        } else if (navbarTopShape === 'slim' && navbarPosition === 'combo') {
+          navbarDefault?.remove();
+          navbarTop?.remove();
+          topNavSlim?.remove();
+          navbarCombo?.remove();
+          navbarTopSlim?.remove();
+          dualNav?.remove();
+          navbarComboSlim.removeAttribute('style');
+          navbarVertical.removeAttribute('style');
+          document.documentElement.setAttribute('data-navbar-horizontal-shape', 'slim');
+        } else if (navbarTopShape === 'default' && navbarPosition === 'horizontal') {
+          navbarDefault?.remove();
+          topNavSlim?.remove();
+          navbarVertical?.remove();
+          navbarTopSlim?.remove();
+          navbarCombo?.remove();
+          navbarComboSlim?.remove();
+          dualNav?.remove();
+          navbarTop.removeAttribute('style');
+          document.documentElement.setAttribute('data-navigation-type', 'horizontal');
+        } else if (navbarTopShape === 'default' && navbarPosition === 'combo') {
+          topNavSlim?.remove();
+          navbarTop?.remove();
+          navbarTopSlim?.remove();
+          navbarDefault?.remove();
+          navbarComboSlim?.remove();
+          dualNav?.remove();
+          navbarCombo.removeAttribute('style');
+          navbarVertical.removeAttribute('style');
+          document.documentElement.setAttribute('data-navigation-type', 'combo');
+        } else {
+          topNavSlim?.remove();
+          navbarTop?.remove();
+          navbarTopSlim?.remove();
+          navbarCombo?.remove();
+          navbarComboSlim?.remove();
+          dualNav?.remove();
+          navbarDefault.removeAttribute('style');
+          navbarVertical.removeAttribute('style');
+        }
+
+        var navbarTopStyle = window.config.config.phoenixNavbarTopStyle;
+        var navbarTop = document.querySelector('.navbar-top');
+        if (navbarTopStyle === 'darker') {
+          navbarTop.setAttribute('data-navbar-appearance', 'darker');
+        }
+
+        var navbarVerticalStyle = window.config.config.phoenixNavbarVerticalStyle;
+        var navbarVertical = document.querySelector('.navbar-vertical');
+        if (navbarVerticalStyle === 'darker') {
+          navbarVertical.setAttribute('data-navbar-appearance', 'darker');
+        }
+      </script>
+      <div class="content">
+        <div class="pb-5">
+          <div class="row g-4">
+            <div class="col-12 col-xxl-6">
+              <div class="mb-8">
+                <h2 class="mb-2">Bienvenido Bruce Castillo! </h2>
+                <h5 class="text-body-tertiary fw-semibold">Esto es lo que está pasando en tu Datecenter ahora mismo</h5>
+              </div>
+
+              
+<!-- Modal de código de verificación -->
+<div class="modal fade" id="verticallyCentered" tabindex="-1" aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container">
+          <div class="px-xxl-5 p-4">
+            <div class="text-center mb-3 p-2">
+              <h4 class="text-body-highlight">Ingrese el código de verificación</h4>
+              <p class="text-body-tertiary mb-2">
+                Para acceder al datacenter, ingrese el código de verificación único.
+              </p>
+
+              <!-- Alerta de error (Bootstrap) -->
+              <div id="errorAlert" class="alert alert-danger d-none" role="alert">
+                Código de verificación incorrecto. Intenta nuevamente.
+              </div>
+
+              <form id="verificationForm" class="verification-form" data-2fa-form="data-2fa-form">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                  <input class="form-control px-2 text-center" type="number" />
+                  <input class="form-control px-2 text-center" type="number" />
+                  <input class="form-control px-2 text-center" type="number" />
+                  <span>-</span>
+                  <input class="form-control px-2 text-center" type="number" />
+                  <input class="form-control px-2 text-center" type="number" />
+                  <input class="form-control px-2 text-center" type="number" />
+                </div>
+                <Button class="btn btn-primary w-100 mb-1" type="submit" disabled="disabled">Verify</Button>
+                <Button class="btn btn-danger w-100 mb-5" type="button" data-bs-dismiss="modal">Cancel</Button>
+                <a class="fs-9" href="#!">¿Olvidaste tu código?</a>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Segundo Modal (Reconocimiento Facial) -->
+<div class="modal fade" id="modalLogin" tabindex="-1" aria-labelledby="verticallyCenteredModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="container">
+          <div class="px-xxl-5 p-4">
+            <div class="text-center mb-3 p-2">
+              <h4 class="text-body-highlight">Muestre su rostro en pantalla</h4>
+              <p class="text-body-tertiary mb-2">
+                Para acceder se debe realizar reconocimiento facial.
+              </p>
+              <form class="verification-form" data-2fa-form="data-2fa-form">
+                <video id="videoElement" width="283" height="220" autoplay></video>
+                <br />
+                <center>
+                <Button class="btn btn-primary w-100 mb-1" type="submit">Verificar</Button>
+                <Button class="btn btn-danger w-100 mb-5" type="button" data-bs-dismiss="modal">Cancel</Button>
+              </center>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+                      <!-- Agregar esto en el archivo HTML donde está tu código. -->
+                      <script>
+                        // Función para validar el código de verificación
+                        const validateCode = (code) => {
+                          const validCode = "123456"; // El código de verificación válido
+                      
+                          // Verificar si el código ingresado es correcto
+                          return code === validCode;
+                        };
+                      
+                        // Función para cambiar de modal
+                        const showModal = (modalIdToShow, modalIdToHide) => {
+                          // Cerrar el modal actual
+                          const currentModal = new bootstrap.Modal(document.getElementById(modalIdToHide));
+                          currentModal.hide();
+                      
+                          // Abrir el siguiente modal
+                          const nextModal = new bootstrap.Modal(document.getElementById(modalIdToShow));
+                          nextModal.show();
+                        };
+                      
+                        // Event listener para el primer modal (para verificar el código de verificación)
+                        document.getElementById("verificationForm").addEventListener("submit", function (event) {
+                          event.preventDefault();
+                      
+                          // Obtener el código ingresado
+                          const codeInputs = document.querySelectorAll("#verticallyCentered input");
+                          let code = "";
+                          codeInputs.forEach(input => {
+                            code += input.value;  // Concatenar los valores de las entradas
+                          });
+                      
+                          // Validar el código
+                          if (validateCode(code)) {
+                            // Si el código es correcto, cerrar el primer modal y abrir el segundo
+                            showModal("modalLogin", "verticallyCentered");
+                          } else {
+                            // Mostrar la alerta de error
+                            const errorAlert = document.getElementById("errorAlert");
+                            errorAlert.classList.remove("d-none"); // Muestra la alerta
+                      
+                            // Ocultar la alerta después de 3 segundos
+                            setTimeout(() => {
+                              errorAlert.classList.add("d-none"); // Ocultar la alerta
+                            }, 3000);
+                          }
+                        });
+                      
+                        // Iniciar la cámara cuando el modal de reconocimiento facial se abra
+                        document.getElementById("modalLogin").addEventListener("shown.bs.modal", function () {
+                          startCamera();
+                        });
+                      
+                        // Función para iniciar la cámara
+                        function startCamera() {
+                          const video = document.getElementById("videoElement");
+                      
+                          if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                            navigator.mediaDevices.getUserMedia({ video: true })
+                              .then(function (stream) {
+                                video.srcObject = stream;
+                              })
+                              .catch(function (error) {
+                                console.error("Error al acceder a la cámara: ", error);
+                              });
+                          }
+                        }
+                      
+                        // Función para detener la cámara cuando el modal se cierra
+                        document.getElementById("modalLogin").addEventListener("hidden.bs.modal", function () {
+                          const video = document.getElementById("videoElement");
+                          const stream = video.srcObject;
+                          const tracks = stream.getTracks();
+                      
+                          // Detener todos los tracks de video (cámara)
+                          tracks.forEach(track => track.stop());
+                        });
+                      </script>
+                      
+
+                    
+              <div class="row align-items-center g-4">
+                <div class="col-12 col-md-auto">
+                  <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x dark__text-opacity-50 text-success-light" data-fa-transform="down-4 rotate--10 left-4"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-stats-circle-success" data-fa-transform="up-4 right-3 grow-2"></span><span class="fa-stack-1x fa-solid fa-data text-success " data-fa-transform="shrink-2 up-8 right-6"></span></span>
+                    <div class="ms-3">
+                      <h4 class="mb-0" data-bs-toggle="modal" data-bs-target="#verticallyCentered" style="cursor: pointer; ">Acceder al Datecenter</h4>
+                      
+                      <p class="text-body-secondary fs-9 mb-0">Esperando acceso</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-auto">
+                  <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x dark__text-opacity-50 text-warning-light" data-fa-transform="down-4 rotate--10 left-4" id="statusColor1"></span><span class="fa-solid fa-circle fa-stack-2x  text-stats-circle-warning" data-fa-transform="up-4 right-3 grow-2" id="statusColor2"></span><span class="fa-stack-1x fa-solid fa-pause text-warning " data-fa-transform="shrink-2 up-8 right-6" id="iconStatus"></span></span>
+                    <div class="ms-3">
+                      <input type="number" value="0" id="valueTurnOffLights" class="d-none" />
+                      <h4 class="mb-0" style="cursor: pointer;" id="turnOnLights">Encender Luces</h4>
+                      <p class="text-body-secondary fs-9 mb-0" id="textLights">Luces Apagadas</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-auto">
+                  <div class="d-flex align-items-center"><span class="fa-stack" style="min-height: 46px;min-width: 46px;"><span class="fa-solid fa-square fa-stack-2x dark__text-opacity-50 text-danger-light" data-fa-transform="down-4 rotate--10 left-4" id="statusColorMovimiento2"></span><span class="fa-solid fa-circle fa-stack-2x stack-circle text-stats-circle-danger" data-fa-transform="up-4 right-3 grow-2" id="statusColorMovimiento2"></span><span class="fa-stack-1x fa-solid fa-xmark text-danger " data-fa-transform="shrink-2 up-8 right-6" id="iconMovimiento"></span></span>
+                    <div class="ms-3">
+                      <h4 class="mb-0" id="idMovimiento">Sin movimiento</h4>
+                      <p class="text-body-secondary fs-9 mb-0" id="descMovimiento">No existe movimiento</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr class="bg-body-secondary mb-6 mt-4" />
+              <div class="row flex-between-center mb-4 g-3">
+                <div class="col-auto">
+                  <h3>Corriente Actual</h3>
+                  <p class="text-body-tertiary lh-sm mb-0" id="actualCurrent">Corriente actual 10</p>
+                </div>
+        
+              </div>
+              <div class="actualCurrentData" style="min-height:320px;width:100%"></div>
+            </div>
+            <div class="col-12 col-xxl-6">
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h5 class="mb-2">Temperatura</h5>
+                          <h6 class="text-body-tertiary">Temperatura actual</h6>
+                        </div>
+                      </div>
+                      <div class="pb-4 pt-3">
+                        <div class="echart-top-Temperature" style="height:115px;width:100%;"></div>
+                      </div>
+                      <div>
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-primary me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">Temperatura Actual</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualTemperature">72%</h6>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-primary-lighter me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">Porcentaje de incremento</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualIncrementTemperature">18%</h6>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h5 class="mb-2">Humedad</h5>
+                          <h6 class="text-body-tertiary">Humedad actual</h6>
+                        </div>
+                      </div>
+                      <div class="pb-4 pt-3">
+                        <div class="echart-top-Humidity" style="height:115px;width:100%;"></div>
+                      </div>
+                      <div>
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-primary me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">Humedad Actual</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualHumidity">72%</h6>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-primary-lighter me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">Porcentaje de incremento</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualIncrementHumidity">18%</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 col-md-6">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h5 class="mb-2">CO2</h5>
+                          <h6 class="text-body-tertiary">CO2 actual</h6>
+                        </div>
+                      </div>
+                      <div class="pb-4 pt-3">
+                        <div class="echart-top-CO2" style="height:115px;width:100%;"></div>
+                      </div>
+                      <div>
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-primary me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">CO₂ Actual</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualCo2">72%</h6>
+                        </div>
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-primary-lighter me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">Porcentaje de incremento</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualIncrementCo2">18%</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                
+                <div class="col-12 col-md-6">
+                  <div class="card h-100">
+                    <div class="card-body d-flex flex-column">
+                      <div class="d-flex justify-content-between">
+                        <div>
+                          <h5 class="mb-2">Proximidad</h5>
+                          <h6 class="text-body-tertiary">Proximidad Actual</h6>
+                        </div>
+                      </div>
+                      <div class="d-flex justify-content-center pt-3 flex-1">
+                        <div class="echarts-proximity" style="height:100%;width:100%;"></div>
+                      </div>
+                      <div class="mt-3">
+                        <div class="d-flex align-items-center mb-2">
+                          <div class="bullet-item bg-primary me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">Proximidad</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualDistance">30 cm</h6>
+                        </div>
+                        <div class="d-flex align-items-center">
+                          <div class="bullet-item bg-primary-subtle me-2"></div>
+                          <h6 class="text-body fw-semibold flex-1 mb-0">Incremento</h6>
+                          <h6 class="text-body fw-semibold mb-0" id="actualIncrementDistance">70%</h6>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+              </div>
+              
+            </div>
+            
+          </div>
+          
+        </div>
+        
+        <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-body-emphasis pt-7 border-y">
+     
+              
+                  <h3>Mapa de calor</h3>
+                  <p class="text-body-tertiary mb-0">Prediccion del mapa de calor del datacenter</p>
+                  
+                  <!-- Find the JS file for the following chart at: src/js/charts/echarts/examples/heatmap-chart.js-->
+                  <!-- If you are not using gulp based workflow, you can find the transpiled code at: public/assets/js/echarts-example.js-->
+                  <div class="echart-heatmap-chart-example" style="min-height: 350px; user-select: none; position: relative;" _echarts_instance_="ec_1745101209017"><div style="position: relative; width: 731px; height: 350px; padding: 0px; margin: 0px; border-width: 0px; cursor: default;"><canvas style="position: absolute; left: 0px; top: 0px; width: 731px; height: 350px; user-select: none; padding: 0px; margin: 0px; border-width: 0px;" data-zr-dom-id="zr_0" width="731" height="350"></canvas></div><div class="" style="position: absolute; display: block; border-style: solid; white-space: nowrap; z-index: 9999999; box-shadow: rgba(0, 0, 0, 0.2) 1px 2px 10px; transition: opacity 0.2s cubic-bezier(0.23, 1, 0.32, 1), visibility 0.2s cubic-bezier(0.23, 1, 0.32, 1), transform 0.4s cubic-bezier(0.23, 1, 0.32, 1); background-color: rgb(239, 242, 246); border-width: 1px; border-radius: 4px; color: rgb(20, 24, 36); font: 14px / 21px sans-serif; padding: 7px 10px; top: 0px; left: 0px; transform: translate3d(599px, -35px, 0px); border-color: rgb(203, 208, 221); pointer-events: none; visibility: hidden; opacity: 0;"><div style="margin: 0px 0 0;line-height:1;"><div style="margin: 0px 0 0;line-height:1;"><span style="display:inline-block;margin-right:4px;border-radius:10px;width:10px;height:10px;background-color:rgba(22,166,96,1);"></span><span style="font-size:14px;color:#141824;font-weight:400;margin-left:2px">8p</span><span style="float:right;margin-left:20px;font-size:14px;color:#141824;font-weight:900">8</span><div style="clear:both"></div></div><div style="clear:both"></div></div><div style="position:absolute;width:6px;height:6px;z-index:-1;left:50%;bottom:-4.21px;transform:translateX(-50%) rotate(45deg);border-bottom:#cbd0dd solid 1px;border-right:#cbd0dd solid 1px;background-color:#eff2f6;"></div></div></div>
+                
+            
+    
+          
+        </div>
+        <div class="mx-n4 px-4 mx-lg-n6 px-lg-6 bg-body-emphasis pt-7 border-y">
+          <div data-list='{"valueNames":["distance","co2","temperature","humidity","light","current","time"],"page":6}'>
+        
+            <div class="row align-items-end justify-content-between pb-5 g-3">
+              <div class="col-auto">
+                <h3>Historial de datos</h3>
+                <p class="text-body-tertiary lh-sm mb-0">Datos historicos</p>
+              </div>
+              <div class="col-12 col-md-auto">
+                <div class="row g-2 gy-3">
+                  <div class="col-auto flex-1">
+                    <div class="search-box">
+                      <form class="position-relative"><input class="form-control search-input search form-control-sm" type="search" placeholder="Search" aria-label="Search" />
+                        <span class="fas fa-search search-box-icon"></span>
+                      </form>
+                    </div>
+                  </div>
+               
+                </div>
+              </div>
+            </div>
+            <div class="table-responsive mx-n1 px-1 scrollbar">
+              <table class="table fs-9 mb-0 border-top border-translucent">
+                <thead>
+                  <tr>
+                    <th class="sort" scope="col" data-sort="distance">Distancia</th>
+                    <th class="sort" scope="col" data-sort="co2">CO2</th>
+                    <th class="sort" scope="col" data-sort="temperature">Temperatura</th>
+                    <th class="sort" scope="col" data-sort="humidity">Humedad</th>
+                    <th class="sort" scope="col" data-sort="light">Luz</th>
+                    <th class="sort" scope="col" data-sort="current">Corriente</th>
+                    <th class="sort" scope="col" data-sort="time">Fecha</th>
+                  </tr>
+                </thead>
+                <tbody class="list" id="table-latest-review-body">
+                  <tr>
+                    <td class="distance">100</td>
+                    <td class="co2">400</td>
+                    <td class="temperature">22.5</td>
+                    <td class="humidity">50.3</td>
+                    <td class="light">200.2</td>
+                    <td class="current">5.1</td>
+                    <td class="time">2025-03-05 21:52:47</td>
+                  </tr>
+                  <tr>
+                    <td class="distance">120</td>
+                    <td class="co2">400</td>
+                    <td class="temperature">22.5</td>
+                    <td class="humidity">50.3</td>
+                    <td class="light">200.2</td>
+                    <td class="current">5.1</td>
+                    <td class="time">2025-03-05 21:54:47</td>
+                  </tr>
+                  <tr>
+                    <td class="distance">300</td>
+                    <td class="co2">400</td>
+                    <td class="temperature">22.5</td>
+                    <td class="humidity">50.3</td>
+                    <td class="light">222.2</td>
+                    <td class="current">5.1</td>
+                    <td class="time">2025-03-05 21:55:47</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+            </div>
+            <div class="row align-items-center py-1">
+              <div class="pagination d-none"></div>
+              <div class="col d-flex fs-9">
+                <p class="mb-0 d-none d-sm-block me-3 fw-semibold text-body" data-list-info="data-list-info"></p><a class="fw-semibold" href="#!" data-list-view="*">View all<span class="fas fa-angle-right ms-1" data-fa-transform="down-1"></span></a><a class="fw-semibold d-none" href="#!" data-list-view="less">View Less</a>
+              </div>
+              <div class="col-auto d-flex">
+                <button class="btn btn-link px-1 me-1" type="button" title="Previous" data-list-pagination="prev"><span class="fas fa-chevron-left me-2"></span>Previous</button><button class="btn btn-link px-1 ms-1" type="button" title="Next" data-list-pagination="next">Next<span class="fas fa-chevron-right ms-2"></span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <footer class="footer position-absolute">
+          <div class="row g-0 justify-content-between align-items-center h-100">
+            <div class="col-12 col-sm-auto text-center">
+              <p class="mb-0 mt-2 mt-sm-0 text-body">Copyright<span class="d-none d-sm-inline-block"></span><span class="d-none d-sm-inline-block mx-1"> </span><br class="d-sm-none" />2025 &copy;<a class="mx-1" href="https://devscapital.com/">Devscapital</a></p>
+            </div>
+            <div class="col-12 col-sm-auto text-center">
+              <p class="mb-0 text-body-tertiary text-opacity-85">v1.22.0</p>
+            </div>
+          </div>
+        </footer>
+      </div>
+      
+    </main><!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+    <div class="offcanvas offcanvas-end settings-panel border-0" id="settings-offcanvas" tabindex="-1" aria-labelledby="settings-offcanvas">
+      <div class="offcanvas-header align-items-start border-bottom flex-column border-translucent">
+        <div class="pt-1 w-100 mb-6 d-flex justify-content-between align-items-start">
+          <div>
+            <h5 class="mb-2 me-2 lh-sm"><span class="fas fa-palette me-2 fs-8"></span>Theme Customizer</h5>
+            <p class="mb-0 fs-9">Explore different styles according to your preferences</p>
+          </div><button class="btn p-1 fw-bolder" type="button" data-bs-dismiss="offcanvas" aria-label="Close"><span class="fas fa-times fs-8"> </span></button>
+        </div><button class="btn btn-phoenix-secondary w-100" data-theme-control="reset"><span class="fas fa-arrows-rotate me-2 fs-10"></span>Reset to default</button>
+      </div>
+      <div class="offcanvas-body scrollbar px-card" id="themeController">
+        <div class="setting-panel-item mt-0">
+          <h5 class="setting-panel-item-title">Color Scheme</h5>
+          <div class="row gx-2">
+            <div class="col-4"><input class="btn-check" id="themeSwitcherLight" name="theme-color" type="radio" value="light" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherLight"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/default-light.png" alt=""/></span><span class="label-text">Light</span></label></div>
+            <div class="col-4"><input class="btn-check" id="themeSwitcherDark" name="theme-color" type="radio" value="dark" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherDark"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/default-dark.png" alt=""/></span><span class="label-text"> Dark</span></label></div>
+            <div class="col-4"><input class="btn-check" id="themeSwitcherAuto" name="theme-color" type="radio" value="auto" data-theme-control="phoenixTheme" /><label class="btn d-inline-block btn-navbar-style fs-9" for="themeSwitcherAuto"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype mb-0" src="assets/img/generic/auto.png" alt=""/></span><span class="label-text"> Auto</span></label></div>
+          </div>
+        </div>
+        <div class="border border-translucent rounded-3 p-4 setting-panel-item bg-body-emphasis">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="setting-panel-item-title mb-1">RTL </h5>
+            <div class="form-check form-switch mb-0"><input class="form-check-input ms-auto" type="checkbox" data-theme-control="phoenixIsRTL" /></div>
+          </div>
+          <p class="mb-0 text-body-tertiary">Change text direction</p>
+        </div>
+        <div class="border border-translucent rounded-3 p-4 setting-panel-item bg-body-emphasis">
+          <div class="d-flex justify-content-between align-items-center">
+            <h5 class="setting-panel-item-title mb-1">Support Chat </h5>
+            <div class="form-check form-switch mb-0"><input class="form-check-input ms-auto" type="checkbox" data-theme-control="phoenixSupportChat" /></div>
+          </div>
+          <p class="mb-0 text-body-tertiary">Toggle support chat</p>
+        </div>
+        <div class="setting-panel-item">
+          <h5 class="setting-panel-item-title">Navigation Type</h5>
+          <div class="row gx-2">
+            <div class="col-6"><input class="btn-check" id="navbarPositionVertical" name="navigation-type" type="radio" value="vertical" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionVertical"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="assets/img/generic/default-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="assets/img/generic/default-dark.png" alt=""/></span><span class="label-text">Vertical</span></label></div>
+            <div class="col-6"><input class="btn-check" id="navbarPositionHorizontal" name="navigation-type" type="radio" value="horizontal" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionHorizontal"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="assets/img/generic/top-default-dark.png" alt=""/></span><span class="label-text"> Horizontal</span></label></div>
+            <div class="col-6"><input class="btn-check" id="navbarPositionCombo" name="navigation-type" type="radio" value="combo" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionCombo"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="assets/img/generic/nav-combo-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="assets/img/generic/nav-combo-dark.png" alt=""/></span><span class="label-text"> Combo</span></label></div>
+            <div class="col-6"><input class="btn-check" id="navbarPositionTopDouble" name="navigation-type" type="radio" value="dual-nav" data-theme-control="phoenixNavbarPosition" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarPositionTopDouble"> <span class="rounded d-block"><img class="img-fluid img-prototype d-dark-none" src="assets/img/generic/dual-light.png" alt=""/><img class="img-fluid img-prototype d-light-none" src="assets/img/generic/dual-dark.png" alt=""/></span><span class="label-text"> Dual nav</span></label></div>
+          </div>
+        </div>
+        <div class="setting-panel-item">
+          <h5 class="setting-panel-item-title">Vertical Navbar Appearance</h5>
+          <div class="row gx-2">
+            <div class="col-6"><input class="btn-check" id="navbar-style-default" type="radio" name="config.name" value="default" data-theme-control="phoenixNavbarVerticalStyle" /><label class="btn d-block w-100 btn-navbar-style fs-9" for="navbar-style-default"> <img class="img-fluid img-prototype d-dark-none" src="assets/img/generic/default-light.png" alt="" /><img class="img-fluid img-prototype d-light-none" src="assets/img/generic/default-dark.png" alt="" /><span class="label-text d-dark-none"> Default</span><span class="label-text d-light-none">Default</span></label></div>
+            <div class="col-6"><input class="btn-check" id="navbar-style-dark" type="radio" name="config.name" value="darker" data-theme-control="phoenixNavbarVerticalStyle" /><label class="btn d-block w-100 btn-navbar-style fs-9" for="navbar-style-dark"> <img class="img-fluid img-prototype d-dark-none" src="assets/img/generic/vertical-darker.png" alt="" /><img class="img-fluid img-prototype d-light-none" src="assets/img/generic/vertical-lighter.png" alt="" /><span class="label-text d-dark-none"> Darker</span><span class="label-text d-light-none">Lighter</span></label></div>
+          </div>
+        </div>
+        <div class="setting-panel-item">
+          <h5 class="setting-panel-item-title">Horizontal Navbar Shape</h5>
+          <div class="row gx-2">
+            <div class="col-6"><input class="btn-check" id="navbarShapeDefault" name="navbar-shape" type="radio" value="default" data-theme-control="phoenixNavbarTopShape" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarShapeDefault"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="assets/img/generic/top-default-dark.png" alt=""/></span><span class="label-text">Default</span></label></div>
+            <div class="col-6"><input class="btn-check" id="navbarShapeSlim" name="navbar-shape" type="radio" value="slim" data-theme-control="phoenixNavbarTopShape" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarShapeSlim"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="assets/img/generic/top-slim.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="assets/img/generic/top-slim-dark.png" alt=""/></span><span class="label-text"> Slim</span></label></div>
+          </div>
+        </div>
+        <div class="setting-panel-item">
+          <h5 class="setting-panel-item-title">Horizontal Navbar Appearance</h5>
+          <div class="row gx-2">
+            <div class="col-6"><input class="btn-check" id="navbarTopDefault" name="navbar-top-style" type="radio" value="default" data-theme-control="phoenixNavbarTopStyle" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarTopDefault"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="assets/img/generic/top-default.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="assets/img/generic/top-style-darker.png" alt=""/></span><span class="label-text">Default</span></label></div>
+            <div class="col-6"><input class="btn-check" id="navbarTopDarker" name="navbar-top-style" type="radio" value="darker" data-theme-control="phoenixNavbarTopStyle" /><label class="btn d-inline-block btn-navbar-style fs-9" for="navbarTopDarker"> <span class="mb-2 rounded d-block"><img class="img-fluid img-prototype d-dark-none mb-0" src="assets/img/generic/navbar-top-style-light.png" alt=""/><img class="img-fluid img-prototype d-light-none mb-0" src="assets/img/generic/top-style-lighter.png" alt=""/></span><span class="label-text d-dark-none">Darker</span><span class="label-text d-light-none">Lighter</span></label></div>
+          </div>
+        </div><a class="bun btn-primary d-grid mb-3 text-white mt-5 btn btn-primary" href="https://themes.getbootstrap.com/product/phoenix-admin-dashboard-webapp-template/" target="_blank">Purchase template</a>
+      </div>
+    </div><a class="card setting-toggle" href="#settings-offcanvas" data-bs-toggle="offcanvas">
+      <div class="card-body d-flex align-items-center px-2 py-1">
+        <div class="position-relative rounded-start" style="height:34px;width:28px">
+          <div class="settings-popover"><span class="ripple"><span class="fa-spin position-absolute all-0 d-flex flex-center"><span class="icon-spin position-absolute all-0 d-flex flex-center"><svg width="20" height="20" viewBox="0 0 20 20" fill="#ffffff" xmlns="http://www.w3.org/2000/svg"><path d="M19.7369 12.3941L19.1989 12.1065C18.4459 11.7041 18.0843 10.8487 18.0843 9.99495C18.0843 9.14118 18.4459 8.28582 19.1989 7.88336L19.7369 7.59581C19.9474 7.47484 20.0316 7.23291 19.9474 7.03131C19.4842 5.57973 18.6843 4.28943 17.6738 3.20075C17.5053 3.03946 17.2527 2.99914 17.0422 3.12011L16.393 3.46714C15.6883 3.84379 14.8377 3.74529 14.1476 3.3427C14.0988 3.31422 14.0496 3.28621 14.0002 3.25868C13.2568 2.84453 12.7055 2.10629 12.7055 1.25525V0.70081C12.7055 0.499202 12.5371 0.297594 12.2845 0.257272C10.7266 -0.105622 9.16879 -0.0653007 7.69516 0.257272C7.44254 0.297594 7.31623 0.499202 7.31623 0.70081V1.23474C7.31623 2.09575 6.74999 2.8362 5.99824 3.25599C5.95774 3.27861 5.91747 3.30159 5.87744 3.32493C5.15643 3.74527 4.26453 3.85902 3.53534 3.45302L2.93743 3.12011C2.72691 2.99914 2.47429 3.03946 2.30587 3.20075C1.29538 4.28943 0.495411 5.57973 0.0322686 7.03131C-0.051939 7.23291 0.0322686 7.47484 0.242788 7.59581L0.784376 7.8853C1.54166 8.29007 1.92694 9.13627 1.92694 9.99495C1.92694 10.8536 1.54166 11.6998 0.784375 12.1046L0.242788 12.3941C0.0322686 12.515 -0.051939 12.757 0.0322686 12.9586C0.495411 14.4102 1.29538 15.7005 2.30587 16.7891C2.47429 16.9504 2.72691 16.9907 2.93743 16.8698L3.58669 16.5227C4.29133 16.1461 5.14131 16.2457 5.8331 16.6455C5.88713 16.6767 5.94159 16.7074 5.99648 16.7375C6.75162 17.1511 7.31623 17.8941 7.31623 18.7552V19.2891C7.31623 19.4425 7.41373 19.5959 7.55309 19.696C7.64066 19.7589 7.74815 19.7843 7.85406 19.8046C9.35884 20.0925 10.8609 20.0456 12.2845 19.7729C12.5371 19.6923 12.7055 19.4907 12.7055 19.2891V18.7346C12.7055 17.8836 13.2568 17.1454 14.0002 16.7312C14.0496 16.7037 14.0988 16.6757 14.1476 16.6472C14.8377 16.2446 15.6883 16.1461 16.393 16.5227L17.0422 16.8698C17.2527 16.9907 17.5053 16.9504 17.6738 16.7891C18.7264 15.7005 19.4842 14.4102 19.9895 12.9586C20.0316 12.757 19.9474 12.515 19.7369 12.3941ZM10.0109 13.2005C8.1162 13.2005 6.64257 11.7893 6.64257 9.97478C6.64257 8.20063 8.1162 6.74905 10.0109 6.74905C11.8634 6.74905 13.3792 8.20063 13.3792 9.97478C13.3792 11.7893 11.8634 13.2005 10.0109 13.2005Z" fill="#2A7BE4"></path></svg></span></span></span></div>
+        </div><small class="text-uppercase text-body-tertiary fw-bold py-2 pe-2 ps-1 rounded-end">customize</small>
+      </div>
+    </a>
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ==============================================-->
+        <!-- Comando para mqtt -->
+    <script src="assets/js/mqttws31.min.js.js" ></script>
+    <script src="vendors/popper/popper.min.js"></script>
+    <script src="vendors/bootstrap/bootstrap.min.js"></script>
+    <script src="vendors/anchorjs/anchor.min.js"></script>
+    <script src="vendors/is/is.min.js"></script>
+    <script src="vendors/fontawesome/all.min.js"></script>
+    <script src="vendors/lodash/lodash.min.js"></script>
+    <script src="vendors/list.js/list.min.js"></script>
+    <script src="vendors/feather-icons/feather.min.js"></script>
+    <script src="vendors/dayjs/dayjs.min.js"></script>
+    <script src="vendors/leaflet/leaflet.js"></script>
+    <script src="vendors/leaflet.markercluster/leaflet.markercluster.js"></script>
+    <script src="vendors/leaflet.tilelayer.colorfilter/leaflet-tilelayer-colorfilter.min.js"></script>
+    <script src="assets/js/phoenix.js"></script>
+    <script src="vendors/echarts/echarts.min.js"></script>
+    
+    <script src="assets/js/dashboards/ecommerce-dashboard.js"></script>
+
+        
+    <script src="assets/js/echarts-example.js"></script>
+  </body>
+
+
+<!-- Mirrored from prium.github.io/phoenix/v1.22.0/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 19 Apr 2025 04:13:29 GMT -->
+</html>
