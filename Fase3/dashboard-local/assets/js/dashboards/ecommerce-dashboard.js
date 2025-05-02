@@ -21,6 +21,9 @@
   let datosPrediccion = [];
   let datosCorriente = [];
   let fechasCorriente = [];
+  let datosLuz = [];  // Para almacenar los datos de luz
+  let fechasLuz = []; // Para almacenar las fechas/timestamps de la luz
+  let graficoLuz = null; // La gráfica de luz ambiental
   let graficoCorriente = null;
   let temperatureChart = null;
   let humidityChart = null;
@@ -88,9 +91,14 @@
         datosPrediccion.push(data);
         console.log("📩 Nuevo dato recibido:", data);
   
+        const light = parseFloat(data.light);
         const current = parseFloat(data.current);
         const timestamp = data["date-time"];
   
+        if (!isNaN(light) && timestamp) {
+          actualizarGraficaLight(light, timestamp); // Actualizamos la gráfica de luz
+        }
+
         if (!isNaN(current) && timestamp) {
           actualizarGraficaCorriente(current, timestamp);
         }
@@ -363,6 +371,159 @@ document.getElementById("turnOnLights").addEventListener("click", function () {
   };
   
 
+
+function actualizarGraficaLight(light, timestamp) {
+  // Limitar los datos a los últimos 30 puntos
+  if (datosLuz.length > 30) {
+    datosLuz.shift();
+    fechasLuz.shift();
+  }
+
+  // Añadir los nuevos datos
+  datosLuz.push(light);
+  fechasLuz.push(timestamp);
+
+  // Actualizar el valor de luz actual en el HTML
+  document.getElementById("actualLight").innerHTML = "Luz Ambiental Actual: " + light;
+
+  // Si ya está inicializado el gráfico, actualizamos la opción
+  if (graficoLuz) {
+    graficoLuz.setOption({
+      xAxis: {
+        data: fechasLuz, // Actualizar las fechas en el eje X
+        axisLine: {
+          lineStyle: {
+            color: '#f39c12', // Color de la línea del eje X
+          },
+        },
+        axisLabel: {
+          formatter: (val) => window.dayjs(val).format("HH:mm:ss"), // Formato de hora
+          color: '#000000', // Color de las etiquetas del eje X
+        },
+      },
+      yAxis: {
+        type: "value",
+        name: "Luz (lux)", // Etiqueta en el eje Y
+        axisLine: {
+          lineStyle: {
+            color: '#f39c12', // Color de la línea del eje Y
+          },
+        },
+        axisLabel: {
+          color: '#000000', // Color de las etiquetas del eje Y
+        },
+      },
+      series: [
+        {
+          data: datosLuz, // Usamos datosLuz para la serie
+          type: "line",
+          smooth: true, // Hacer la línea más suave
+          showSymbol: false, // No mostrar los símbolos en los puntos
+          name: "Luz Ambiental",
+          areaStyle: {
+            color: "rgba(241, 122, 54, 0.3)", // Color de fondo de la gráfica (color suave)
+          },
+          lineStyle: {
+            color: "#f39c12", // Color de la línea
+            width: 3, // Grosor de la línea
+            type: "solid", // Estilo de línea
+          },
+          itemStyle: {
+            color: "#f39c12", // Color de los puntos
+          },
+        },
+      ],
+      tooltip: {
+        trigger: "axis", // Mostrar el tooltip al pasar por el eje
+        backgroundColor: "#34495e", // Fondo del tooltip
+        textStyle: {
+          color: "#ecf0f1", // Color del texto del tooltip
+        },
+        borderColor: "#e74c3c", // Color del borde del tooltip
+        borderWidth: 2,
+      },
+      grid: {
+        left: "3%",
+        right: "4%",
+        bottom: "3%",
+        containLabel: true, // Asegurarse de que las etiquetas estén dentro de la gráfica
+      },
+    });
+  }
+}
+
+const actualLightData = () => {
+  const container = document.querySelector(".actualLightData"); // Contenedor donde se renderiza la gráfica
+  if (!container) return; // Si no existe el contenedor, no hacer nada
+
+  graficoLuz = window.echarts.init(container); // Inicializar el gráfico
+
+  const opcionesIniciales = {
+    xAxis: {
+      type: "category",
+      data: fechasLuz, // Usamos fechasLuz para el eje X
+      axisLabel: {
+        formatter: (val) => window.dayjs(val).format("HH:mm:ss"), // Formato de hora
+        color: '#000000', // Color de las etiquetas del eje X
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#f39c12', // Color de la línea del eje X
+        },
+      },
+    },
+    yAxis: {
+      type: "value",
+      name: "Luz (lux)", // Etiqueta en el eje Y
+      axisLabel: {
+        color: '#e74c3c', // Color de las etiquetas del eje Y
+      },
+      axisLine: {
+        lineStyle: {
+          color: '#f39c12', // Color de la línea del eje Y
+        },
+      },
+    },
+    series: [
+      {
+        data: datosLuz, // Usamos datosLuz para la serie
+        type: "line",
+        smooth: true, // Hacer la línea más suave
+        showSymbol: false, // No mostrar los símbolos en los puntos
+        name: "Luz Ambiental",
+        areaStyle: {
+          color: "rgba(241, 122, 54, 0.3)", // Color de fondo de la gráfica
+        },
+        lineStyle: {
+          color: "#f39c12", // Color de la línea
+          width: 3, // Grosor de la línea
+          type: "solid", // Estilo de línea
+        },
+        itemStyle: {
+          color: "#f39c12", // Color de los puntos
+        },
+      },
+    ],
+    tooltip: {
+      trigger: "axis", // Mostrar el tooltip al pasar por el eje
+      backgroundColor: "#34495e", // Fondo del tooltip
+      textStyle: {
+        color: "#ecf0f1", // Color del texto del tooltip
+      },
+      borderColor: "#e74c3c", // Color del borde del tooltip
+      borderWidth: 2,
+    },
+    grid: {
+      left: "3%",
+      right: "4%",
+      bottom: "3%",
+      containLabel: true, // Asegurarse de que las etiquetas estén dentro de la gráfica
+    },
+  };
+
+  // Inicializar la gráfica con las opciones
+  graficoLuz.setOption(opcionesIniciales);
+};
 
 
 
@@ -2565,6 +2726,7 @@ document.getElementById("turnOnLights").addEventListener("click", function () {
   const { docReady: docReady } = window.phoenix.utils;
   (window.revenueMapInit = revenueMapInit),
     docReady(actualCurrentData),
+    docReady(actualLightData),
     docReady(topTemperatureChartInit),
     docReady(topCo2ChartInit),
     docReady(topHumidityChartInit),
