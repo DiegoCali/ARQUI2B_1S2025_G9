@@ -103,12 +103,12 @@
     client.connect({
       useSSL: true,
       onSuccess: () => {
-        console.log("✅ Conectado al broker");
+        console.log("Conectado al broker");
         client.subscribe("arqui2_p2_g9/prediction_response");
         console.log("Suscrito a 'prediction_response'");
       },
       onFailure: (error) => {
-        console.error("❌ Error de conexión:", error.errorMessage);
+        console.error("Error de conexión:", error.errorMessage);
       }
     });
   

@@ -27683,8 +27683,8 @@ h3,
 
 .alert {
   --phoenix-alert-bg: transparent;
-  --phoenix-alert-padding-x: 1.5rem;
-  --phoenix-alert-padding-y: 1.5rem;
+  --phoenix-alert-padding-x: 0.7rem;
+  --phoenix-alert-padding-y: 1rem;
   --phoenix-alert-margin-bottom: 1rem;
   --phoenix-alert-color: inherit;
   --phoenix-alert-border-color: transparent;

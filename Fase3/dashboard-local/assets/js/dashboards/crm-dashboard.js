@@ -68,9 +68,9 @@
 
   // Cliente MQTT
   const client = new Paho.MQTT.Client(
-    "broker.emqx.io",
-    8084,
-    "cliente_web_" + Math.random()
+    config.MQTT_BROKER_URL,
+    config.MQTT_PORT,
+    config.MQTT_CLIENT_ID
   );
 
   let datosPrediccion = []; // Guardar respuesta
@@ -103,12 +103,11 @@
   client.connect({
     useSSL: true,
     onSuccess: () => {
-      console.log("✅ Conectado al broker");
-      client.subscribe("arqui2_p2_g9/prediction_response");
-      console.log("Suscrito a 'prediction_response'");
+      console.log("Conectado al topic de predicciones");
+      client.subscribe(config.MQTT_TOPIC_PREDICTION_RESPONSE);
     },
     onFailure: (error) => {
-      console.error("❌ Error de conexión:", error.errorMessage);
+      console.error("Error de conexión:", error.errorMessage);
     }
   });
 
@@ -127,7 +126,7 @@
     };
 
     const message = new Paho.MQTT.Message(JSON.stringify(payload));
-    message.destinationName = "arqui2_p2_g9/prediction_request";
+    message.destinationName = config.MQTT_TOPIC_PREDICTION_REQUEST;
     client.send(message);
 
     console.log("Mensaje enviado automáticamente:", JSON.stringify(payload));

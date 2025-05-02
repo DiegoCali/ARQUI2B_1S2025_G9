@@ -6,15 +6,15 @@
 
 
   const client = new Paho.MQTT.Client(
-    "broker.emqx.io",
-    8084,
-    "cliente_web_" + Math.random()
+    config.MQTT_BROKER_URL,
+    config.MQTT_PORT,
+    config.MQTT_CLIENT_ID
   );
   
   const client2 = new Paho.MQTT.Client(
-    "broker.emqx.io",
-    8084,
-    "cliente_web_" + Math.random()
+    config.MQTT_BROKER_URL,
+    config.MQTT_PORT,
+    config.MQTT_CLIENT_ID + "_2"
   );
   
   // Arreglo donde se acumularán los datos
@@ -67,7 +67,7 @@
       
   
     } catch (e) {
-      console.error("❌ Error procesando mensaje:", e);
+      console.error("Error procesando mensaje:", e);
     }
   };
 
@@ -172,7 +172,7 @@
         console.warn("⚠️ Mensaje no esperado:", data);
       }
     } catch (e) {
-      console.error("❌ Error procesando mensaje:", e);
+      console.error("Error procesando mensaje:", e);
     }
   };
   
@@ -181,28 +181,26 @@
   client.connect({
     useSSL: true,
     onSuccess: () => {
-      console.log("✅ Conectado al broker");
-      client.subscribe("sensor/data/arduino_data");
-      console.log("📡 Suscrito al topic 'sensor/data/arduino_data'");
+      console.log("Conectado al topic Data");
+      client.subscribe(config.MQTT_TOPIC_DATA);
       
       // Ahora podemos publicar el comando, ya que la conexión fue exitoso
     },
     onFailure: (error) => {
-      console.error("❌ Error de conexión:", error.errorMessage);
+      console.error("Error de conexión:", error.errorMessage);
     }
   });
 
   client2.connect({
     useSSL: true,
     onSuccess: () => {
-      console.log("✅ Conectado al broker");
-      client2.subscribe("arqui2_p2_g9/persons");
-      console.log("📡 Suscrito al topic 'arqui2_p2_g9/persons'");
+      console.log("Conectado al topic Persons");
+      client2.subscribe(config.MQTT_TOPIC_PERSONS);
       
       // Ahora podemos publicar el comando, ya que la conexión fue exitoso
     },
     onFailure: (error) => {
-      console.error("❌ Error de conexión:", error.errorMessage);
+      console.error("Error de conexión:", error.errorMessage);
     }
   });
   
@@ -225,7 +223,7 @@ document.getElementById("turnOnLights").addEventListener("click", function () {
 
   // 4. Publicar el mensaje a través del cliente MQTT
   const message = new Paho.MQTT.Message(JSON.stringify(payload));
-  message.destinationName = "sensor/data/commands";
+  message.destinationName = config.MQTT_TOPIC_COMMANDS;
 
   client.send(message);
 
@@ -260,7 +258,7 @@ document.getElementById("turnOnLights").addEventListener("click", function () {
     };
     // 4. Publicar el mensaje a través del cliente MQTT
     const message = new Paho.MQTT.Message(JSON.stringify(payload));
-    message.destinationName = "sensor/data/commands";
+    message.destinationName = config.MQTT_TOPIC_COMMANDS;
     client.send(message);
 
     console.log("Mensaje enviado automáticamente:", JSON.stringify(payload));
