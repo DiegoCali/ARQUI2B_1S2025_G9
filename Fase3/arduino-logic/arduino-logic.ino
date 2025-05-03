@@ -114,13 +114,14 @@ void loop() {
       digitalWrite(INLIGHT, LOW);
       digitalWrite(OUTLIGHT, LOW);
     }
-    if (command == 'facetrue'){
+    if (command == 'F')  {
+      Serial.println("Abrir, puerta");
       digitalWrite(OPENSERVO, HIGH);
-      delay(10);      
+      delay(100);      
       digitalWrite(OPENSERVO, LOW);
-      delay(1980);
+      delay(1800);
       digitalWrite(CLOSESERVO, HIGH);
-      delay(10);
+      delay(100);
       digitalWrite(CLOSESERVO, LOW);
     }
   }

@@ -25,6 +25,8 @@ class SerialHandler:
     
     def write_line(self, data):
         # Example of writing data to the serial port: [command]\n
+        if data == "facetrue":
+            data = "F"
         self.ser.write((data + '\n').encode('utf-8'))
 
     def close(self):
