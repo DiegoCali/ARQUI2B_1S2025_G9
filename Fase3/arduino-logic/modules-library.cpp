@@ -19,6 +19,8 @@ char lcd_key;
 int adc_key_in = 0;
 bool menu_active = true;
 
+bool entered = false;
+
 float liveData[6];
 
 char sensorChar[6] = {'D', 'G', 'T', 'H', 'L', 'C'};
@@ -257,9 +259,13 @@ bool doorController(int INFRARED, LiquidCrystal_I2C lcd, MFRC522 mfrc522, int OP
         lcd.setCursor(3, 1);
         lcd.print("detectada!");
         digitalWrite(OPEN, HIGH);
-        Serial.println("entered");
+        if (!entered){
+          Serial.println("entered");
+          entered = true;
+        }
       }
     }
+    entered = false;
     digitalWrite(OPEN, LOW);
     delay(2000);
     digitalWrite(CLOSE, HIGH);
